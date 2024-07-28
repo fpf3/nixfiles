@@ -10,7 +10,7 @@ in
     ];
     
     services.pcscd.enable = true; # system-wide pcscd enable
-    services.xserver.windowManager.dwm.package = pkgs.callPackage /home/fred/dev/dwm/default.nix {};
+    services.xserver.windowManager.dwm.package = fpf3_dwm;
 
     users.users.fred = {
         isNormalUser = true;
