@@ -139,6 +139,7 @@ in
             pkgs.dmenu
             pkgs.element-desktop
             pkgs.fd
+            pkgs.feh
             pkgs.firefox
             pkgs.gnumake
             pkgs.htop
