@@ -102,7 +102,7 @@
     enable = true; # We can just leave passwd auth on for the desktop.
     settings = {
       PasswordAuthentication = true;
-      PermitRootLogin = false;
+      PermitRootLogin = "no";
     };
   };
 
