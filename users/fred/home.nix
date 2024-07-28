@@ -1,4 +1,4 @@
-{pkgs, dconf ? null, gtk ? null, pointerCursor ? null, userPackages ? null, ...}:
+{ pkgs, lib, userPackages, dconf ? {}, gtk ? {}, pointerCursor ? {}, ...}:
 {
   home.stateVersion = "24.05"; # Do I bump this, or keep it the same?
 
@@ -51,12 +51,11 @@
         '';
     };
 
-    # vim config in `fredvim.nix`
     vim = (import ./vim.nix) { pkgs=pkgs; };
   };
 
-  dconf = dconf;
-  gtk = gtk;
-  home.pointerCursor = pointerCursor;
+  dconf = lib.mkIf(dconf != {}) dconf;
+  gtk = lib.mkIf(gtk != {}) gtk;
+  home.pointerCursor = lib.mkIf (pointerCursor != {}) pointerCursor;
   home.packages = userPackages;
 }

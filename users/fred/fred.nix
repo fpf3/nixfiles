@@ -37,6 +37,7 @@ in
     # Home Manager
     home-manager.users.fred = (import ./home.nix) { 
       pkgs=pkgs; 
+      lib=lib;
 
       # configs
       dconf = {
@@ -65,6 +66,8 @@ in
         size=16;
         package = pkgs.gnome.adwaita-icon-theme;
       };
+
+      # installed packages
 
       userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
       ++ [

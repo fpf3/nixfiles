@@ -2,7 +2,7 @@
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
 in
-rec {
+{
     imports = 
     [
       (import "${home-manager}/nixos")
@@ -15,7 +15,9 @@ rec {
     # Home Manager
     home-manager.users.fred = (import ./home.nix) { 
       pkgs=pkgs; 
-      # installed packages
+      lib=lib; 
+     
+     # installed packages
       userPackages = (import ./headless_pkgs.nix) { pkgs=pkgs; };
     };
 }
