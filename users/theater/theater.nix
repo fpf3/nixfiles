@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-  fpf3_dwm = pkgs.callPackage /home/fred/dev/dwm/default.nix {};
 in
 {
     imports = 
@@ -9,16 +8,15 @@ in
       (import "${home-manager}/nixos")
     ];
     
-    users.users.fred = (import ./user.nix) { pkgs=pkgs; };
+    users.users.theater = (import ./user.nix) { pkgs=pkgs; };
     
     programs.zsh.enable = true; # Enable ZSH system-wide
 
     services.pcscd.enable = true; # system-wide pcscd enable
-    services.xserver.windowManager.dwm.package = fpf3_dwm;
 
     # not packages per se, but this is what gives us virtualbox
     virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vbox.members = [ "fred" ];
+    users.extraGroups.vbox.members = [ "theater" ];
 
     # steam system config
     programs.steam = {
@@ -35,7 +33,7 @@ in
     };
 
     # Home Manager
-    home-manager.users.fred = (import ./home.nix) { 
+    home-manager.users.theater = (import ./home.nix) { 
       pkgs=pkgs; 
       lib=lib;
 
@@ -71,20 +69,13 @@ in
 
       userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
       ++ [
-          fpf3_dwm
           pkgs.dmenu
           pkgs.element-desktop
           pkgs.feh
           pkgs.firefox
-          pkgs.lukesmithxyz-st
-          pkgs.pywal
           pkgs.remmina
-          pkgs.rofi
-          pkgs.rofimoji
           pkgs.thunderbird
-          pkgs.vesktop
           pkgs.vlc
-          pkgs.xclip
           pkgs.yubioath-flutter
       ];
     };
