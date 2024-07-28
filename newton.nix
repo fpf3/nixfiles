@@ -47,6 +47,8 @@
   #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
   boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
 
+  services.blueman.enable = true;
+
   # peripherals configuration
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
@@ -94,6 +96,16 @@
   
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 8000 ];
+  
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true; # We can just leave passwd auth on for the desktop.
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = false;
+    };
+  };
+
   
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

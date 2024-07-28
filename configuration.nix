@@ -28,11 +28,6 @@
      wget
    ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-      enable = true; # We can just leave passwd auth on for the desktop.
-  };
-
   # enable avahi
   services.avahi = {
     enable = true;
