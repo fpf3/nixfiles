@@ -16,6 +16,11 @@ in
     services.pcscd.enable = true; # system-wide pcscd enable
     services.xserver.windowManager.dwm.package = fpf3_dwm;
 
+    services.syncthing = {
+      enable = true;
+      user = "fred";
+    };
+
     # not packages per se, but this is what gives us virtualbox
     virtualisation.virtualbox.host.enable = true;
     users.extraGroups.vbox.members = [ "fred" ];
