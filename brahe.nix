@@ -60,12 +60,20 @@
 
   networking.hostName = "brahe";
   
+  networking.networkmanager.enable = true;
+  networking.wireless.iwd.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
+  
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.dwm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
+
+  # kde
+  #services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
