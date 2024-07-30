@@ -1,0 +1,62 @@
+#!/bin/sh
+
+chassis_type=`cat /sys/class/dmi/id/chassis_type`
+
+datetime_fmt="%a %b %d, %Y %H:%M:%S %Z"
+
+# FPF3: What to do to detect wayland? Is this it? What do we do if we detect it?
+#WAYLAND="$(loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | grep -i 'wayland')"
+
+cpu_usage() {
+    echo "🧮 :"$(printf "%.2f" $(echo "100 - $(sar -u 1 1 | tail -1 | awk '{print $8}')" | bc))"%"
+}
+
+mem_usage() {
+    echo "💾: "$(printf "%.2f" $(echo "$(free -m | head -2 | tail -1 | awk '{print $3}') / 1024" | bc -l))"GiB"
+}
+
+temp_status() {
+    temp=`sensors | grep 'Tctl' | head -1 | awk '{print $2}'`
+    temp_f=`echo $temp | grep -Eo '[0-9]+([.][0-9]+)?'`
+
+    if (( $(echo "$temp_f > 70.0" | bc -l) )); then
+        tempsym="🔥"
+    else
+        tempsym="🌡️"
+    fi
+    echo "$tempsym: $temp"
+}
+
+bat_status() {
+    case $chassis_type in
+        9|10|11|14) # Laptop | Notebook | Hand Held | Sub Notebook
+            bat_percent=`acpi | awk '{print $4}' | grep -Po '\d+'`
+            if [[ `acpi` == *"Charging"* ]]; then
+                batsym="⚡"
+            elif [ $bat_percent -lt "20" ]; then 
+                batsym="🪫"
+            else
+                batsym="🔋"
+            fi
+
+            echo "$batsym: $bat_percent%"
+        ;;
+    esac
+}
+
+render() {
+    echo "`temp_status` `cpu_usage` `mem_usage``bat_status` | $(date +"$datetime_fmt")" 
+}
+
+
+if [ "$1" == "-cmdline" ]; then
+    while true; do
+        render
+        # CPU usage sleeps for a second, so no worries
+        # sleep 1
+    done
+else
+    while true; do
+        xsetroot -name "`render`"
+    done
+fi;

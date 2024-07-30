@@ -91,7 +91,13 @@ in
           pkgs.vlc
           pkgs.xclip
           pkgs.yubioath-flutter
-      ];
+      ]
+      ++ (with (pkgs.callPackage ./scripts.nix {}); [
+          # Some helper scripts for DWM.
+          as
+          as_blocking
+          statusbar
+      ]);
     };
     
 
