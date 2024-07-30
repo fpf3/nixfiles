@@ -15,4 +15,6 @@
   pkgs.wget
   pkgs.yubikey-manager
   pkgs.zsh
+  pkgs.man-pages
+  pkgs.man-pages-posix
 ]

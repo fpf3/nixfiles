@@ -25,6 +25,9 @@ in
     virtualisation.virtualbox.host.enable = true;
     users.extraGroups.vbox.members = [ "fred" ];
 
+    # give me the man pages... christ
+    documentation.dev.enable = true;
+
     # steam system config
     programs.steam = {
       enable = true;
@@ -53,6 +56,14 @@ in
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
           };
+        };
+      };
+
+      gtk = {
+        enable = true;
+        theme = {
+          name = "Adwaita-dark";
+          package = pkgs.gnome.gnome-themes-extra;
         };
       };
       
