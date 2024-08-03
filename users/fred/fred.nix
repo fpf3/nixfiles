@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-  fpf3_dwm = pkgs.callPackage /home/fred/dev/dwm/default.nix {};
+  fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/fpf3/dwm/master/default.nix") {};
 in
 {
     imports = 

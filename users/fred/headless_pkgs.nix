@@ -2,6 +2,7 @@
 [
   pkgs.bc
   pkgs.fd
+  pkgs.file
   pkgs.gnumake
   pkgs.htop
   pkgs.lm_sensors
