@@ -8,9 +8,9 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # User-defined system-specific config
-      ./newton.nix
+      ./<hostname>.nix
       # User-specific config
-      ./fred.nix
+      ./users/<main_user>/<main_user>.nix
     ];
   
   # Pick only one of the below networking options.
