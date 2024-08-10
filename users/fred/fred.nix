@@ -2,6 +2,7 @@
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/fpf3/dwm/master/default.nix") {};
+  username = "fred";
 in
 {
     imports = 
@@ -18,12 +19,12 @@ in
 
     services.syncthing = {
       enable = true;
-      user = "fred";
+      user = "${username}";
     };
 
     # not packages per se, but this is what gives us virtualbox
     virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vbox.members = [ "fred" ];
+    users.extraGroups.vbox.members = [ "${username}" ];
 
     # give me the man pages... christ
     documentation.dev.enable = true;
@@ -85,10 +86,13 @@ in
           pkgs.feh
           pkgs.firefox
           pkgs.lukesmithxyz-st
+          pkgs.pavucontrol
           pkgs.pywal
           pkgs.remmina
           pkgs.rofi
           pkgs.rofimoji
+          pkgs.scrot
+          pkgs.synergy
           pkgs.thunderbird
           pkgs.vesktop
           pkgs.vlc
@@ -100,6 +104,9 @@ in
           as
           as_blocking
           statusbar
+      ])
+      ++ (with (pkgs.callPackage ./winepkgs.nix { username="${username}"; }); [
+          npp
       ]);
     };
     

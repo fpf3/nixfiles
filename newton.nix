@@ -95,7 +95,7 @@
   system.autoUpgrade.enable = true;
   
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 8000 ];
+  networking.firewall.allowedTCPPorts = [ 22 8000 24800 ];
   
   # Enable the OpenSSH daemon.
   services.openssh = {
