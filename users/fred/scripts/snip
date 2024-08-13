@@ -1,0 +1,15 @@
+#!/bin/sh
+
+pushd .
+
+SNIPDIR="$HOME/Pictures/snips"
+
+if [ ! -e $SNIPDIR ]; then
+    mkdir -p $SNIPDIR
+fi
+
+echo "Saving to $SNIPDIR"
+
+cd $SNIPDIR
+scrot --select --line mode='edge',opacity=10 -e 'xclip -selection clipboard -t image/png -i $f'
+popd

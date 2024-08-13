@@ -20,6 +20,7 @@ in
     services.syncthing = {
       enable = true;
       user = "${username}";
+      configDir = "/home/${username}/.config/syncthing";
     };
 
     # not packages per se, but this is what gives us virtualbox
@@ -104,9 +105,7 @@ in
           as
           as_blocking
           statusbar
-      ])
-      ++ (with (pkgs.callPackage ./winepkgs.nix { username="${username}"; }); [
-          npp
+          snip
       ]);
     };
     
