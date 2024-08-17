@@ -81,14 +81,16 @@ in
 
       userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
       ++ (with pkgs; [
-          picom
           dmenu
           element-desktop
           feh
           firefox
+          gnome.gnome-tweaks
+          imagemagick
           lukesmithxyz-st
           mumble
           pavucontrol
+          picom
           pywal
           remmina
           rofi

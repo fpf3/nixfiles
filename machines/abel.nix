@@ -65,10 +65,19 @@
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Set X11 monitor R&R
-  services.xserver.displayManager.setupCommands = ''
-    CENTER='eDP-1'
-    ${pkgs.xorg.xrandr}/bin/xrandr --output $CENTER --scale 0.6
-  '';
+
+  services.autorandr.enable = true;
+  services.autorandr.profiles."laptop" = {
+    fingerprint = { 
+      eDP1 = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073"; 
+    };
+
+    config.eDP1 = {
+      enable = true;
+      scale = { x = 0.7; y = 0.7; }; 
+      #dpi = 197;
+    };
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
