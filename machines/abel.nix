@@ -1,14 +1,6 @@
 { config, lib, pkgs, ... }:
 {
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-  builtins.elem (lib.getName pkg) [
-      "steam"
-      "steam-original"
-      "steam-run"
-      "libfprint-2-tod1-goodix"
-    ];
-
   # bootloader config
   boot.loader.grub = {
 		enable = true;
