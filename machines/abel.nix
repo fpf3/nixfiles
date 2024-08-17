@@ -64,6 +64,12 @@
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  # Set X11 monitor R&R
+  services.xserver.displayManager.setupCommands = ''
+    CENTER='eDP-1'
+    ${pkgs.xorg.xrandr}/bin/xrandr --output $CENTER --scale 0.6
+  '';
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

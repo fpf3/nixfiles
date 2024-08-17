@@ -83,6 +83,13 @@
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
+  # Set X11 monitor R&R
+  services.xserver.displayManager.setupCommands = ''
+    RIGHT='HDMI-0'
+    LEFT='DP-0'
+    ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --primary --mode 1920x1080 --rate 144.00 --pos 256x0 --rotate right --output $LEFT --mode 2560x1440 --pos 0x240 --rotate normal --rate 155.00
+  '';
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
