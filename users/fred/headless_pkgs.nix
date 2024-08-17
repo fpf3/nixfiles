@@ -9,6 +9,7 @@ with pkgs; [
   lm_sensors
   ncdu
   openfortivpn
+  pciutils
   ranger
   ripgrep
   screen

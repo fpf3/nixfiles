@@ -90,6 +90,33 @@
     ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --primary --mode 1920x1080 --rate 144.00 --pos 256x0 --rotate right --output $LEFT --mode 2560x1440 --pos 0x240 --rotate normal --rate 155.00
   '';
 
+  # Set X11 monitor R&R
+
+  services.autorandr.enable = true;
+  services.autorandr.profiles."default" = {
+    fingerprint = { 
+      "HDMI-0" = "<EDID>";
+      "DP-0" = "<EDID>";
+    };
+
+    config."HDMI-0" = {
+      enable = true;
+      primary = true;
+      position = "0x240";
+      mode = "2560x1440";
+      rate = "155.00";
+    };
+
+    config."DP-0" = {
+      enable = true;
+      primary = false;
+      position = "256x0";
+      mode = "1920x1080";
+      rotate = "right";
+      rate = "144.00";
+    };
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
