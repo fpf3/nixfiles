@@ -81,6 +81,7 @@ in
 
       userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
       ++ (with pkgs; [
+          picom
           dmenu
           element-desktop
           feh

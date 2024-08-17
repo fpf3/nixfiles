@@ -1,3 +1,4 @@
 #!/bin/sh
 nohup statusbar &
-# blueman-applet &
+nohup picom &
+nohup blueman-applet &

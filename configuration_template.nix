@@ -28,6 +28,11 @@
      wget
    ];
 
+  fonts.packages = with pkgs; [
+    noto-fonts
+    joypixels
+  ]
+
   # enable avahi
   services.avahi = {
     enable = true;
