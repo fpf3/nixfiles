@@ -1,5 +1,6 @@
 {pkgs, ...}:
 with pkgs; [
+  acpi
   bc
   fd
   file

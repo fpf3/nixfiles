@@ -3,9 +3,6 @@
 
   nixpkgs.config.allowUnfreePredicate = pkg:
   builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
       "steam"
       "steam-original"
       "steam-run"
@@ -49,7 +46,6 @@
   services.blueman.enable = true;
 
   # peripherals configuration
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
     opengl.enable = true;
     pulseaudio.enable = false;
