@@ -89,6 +89,7 @@ in
           imagemagick
           lukesmithxyz-st
           mumble
+          networkmanagerapplet
           pavucontrol
           picom
           pywal
