@@ -8,7 +8,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # User-defined system-specific config
-      ./<hostname>.nix
+      ./machines/<hostname>.nix
       # User-specific config
       ./users/<main_user>/<main_user>.nix
     ];

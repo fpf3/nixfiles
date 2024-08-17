@@ -103,7 +103,7 @@ in
       ++ [
         fpf3_dwm
       ]
-      ++ (with (pkgs.callPackage ./scripts.nix {}); [
+      ++ (with (pkgs.callPackage ../../scripts/scripts.nix {}); [
           # Some helper scripts for DWM.
           as
           as_blocking
