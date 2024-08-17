@@ -1,16 +1,6 @@
 { config, lib, pkgs, ... }:
 {
 
-  nixpkgs.config.allowUnfreePredicate = pkg:
-  builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-      "steam"
-      "steam-original"
-      "steam-run"
-    ];
-
   # bootloader config
   boot.loader.grub = {
 		enable = true;
@@ -34,7 +24,7 @@
   };
   
   fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/5201-0A77";
+  	device = "/dev/disk/by-uuid/1AE5-B196";
   	fsType = "vfat";
   };
 
@@ -44,33 +34,19 @@
   # Kernel configuration
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.kernelParams = [ "nohibernate" ]; # ZFS does not support swapfiles. Ensure we don't try to hibernate.
+  boot.initrd.kernelModules = [ "amdgpu" ];
   #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
-  boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
 
   services.blueman.enable = true;
 
   # peripherals configuration
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware = {
     opengl.enable = true;
-    nvidia = {
-        modesetting.enable = true; # required
-
-        powerManagement = {
-            enable = true; # Enable this if you have graphical corruption issues waking up from sleep
-            finegrained = false; # Turn off GPU when not in use. "Turing" or newer. Can't use this, because we don't have integrated graphix
-        };
-        
-        open = false; # Open-source module (not nouveau, the upstream NVIDIA one...)
-
-        nvidiaSettings = true; # nvidia-settings manager
-        
-        package = config.boot.kernelPackages.nvidiaPackages.stable; # One of stable, beta, production or vulkan_stable
-    };
     pulseaudio.enable = false;
   };
 
-  networking.hostName = "newton";
+  networking.hostName = "abel";
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -82,6 +58,42 @@
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
+
+  services.fprintd.enable = true;
+  #services.fprintd.tod.enable = true;
+  #services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
+  security.pam.services.gdm-fingerprint.fprintAuth = true; # "/etc/pam.d/gdm-fingerprint" is  not created by default
+  security.pam.services.login.fprintAuth = true; 
+  security.pam.services.sudo.fprintAuth = false;
+  security.pam.services.su.fprintAuth = false;
+
+
+  services.fwupd.enable = true;
+
+  # screen tearing fix (?)
+  services.xserver.deviceSection = ''Option "TearFree" "true"''; # For amdgpu.
+
+  # Set X11 monitor R&R
+
+  services.autorandr.enable = true;
+  services.autorandr.profiles."default" = {
+    fingerprint = { 
+      "eDP" = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
+    };
+
+    config."eDP" = {
+      enable = true;
+      primary = true;
+      scale = { x = 0.7; y = 0.7; }; 
+      position = "0x0";
+      mode = "2256x1504";
+      rate = "60.00";
+      dpi = 97;
+    };
+  };
+
+  # Enable natural scrolling
+  services.libinput.touchpad.naturalScrolling = true; # This is for libinput, but it seems to also work in X11
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

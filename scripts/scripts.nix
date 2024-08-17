@@ -7,4 +7,6 @@
   statusbar = pkgs.writeShellScriptBin "statusbar" (lib.readFile ./scripts/statusbar);
 
   snip = pkgs.writeShellScriptBin "snip" (lib.readFile ./scripts/snip);
+  
+  xsandbox = pkgs.writeShellScriptBin "xsandbox" (lib.readFile ./scripts/xsandbox);
 }

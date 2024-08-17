@@ -80,32 +80,39 @@ in
       # installed packages
 
       userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
+      ++ (with pkgs; [
+          dmenu
+          element-desktop
+          feh
+          firefox
+          gnome.gnome-tweaks
+          imagemagick
+          lukesmithxyz-st
+          mumble
+          pavucontrol
+          picom
+          pywal
+          remmina
+          rofi
+          rofimoji
+          scrot
+          synergy
+          thunderbird
+          vesktop
+          vlc
+          xclip
+          yubioath-flutter
+      ])
       ++ [
-          fpf3_dwm
-          pkgs.dmenu
-          pkgs.element-desktop
-          pkgs.feh
-          pkgs.firefox
-          pkgs.lukesmithxyz-st
-          pkgs.pavucontrol
-          pkgs.pywal
-          pkgs.remmina
-          pkgs.rofi
-          pkgs.rofimoji
-          pkgs.scrot
-          pkgs.synergy
-          pkgs.thunderbird
-          pkgs.vesktop
-          pkgs.vlc
-          pkgs.xclip
-          pkgs.yubioath-flutter
+        fpf3_dwm
       ]
-      ++ (with (pkgs.callPackage ./scripts.nix {}); [
+      ++ (with (pkgs.callPackage ../../scripts/scripts.nix {}); [
           # Some helper scripts for DWM.
           as
           as_blocking
-          statusbar
           snip
+          statusbar
+          xsandbox
       ]);
     };
     
