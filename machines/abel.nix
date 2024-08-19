@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 {
 
+  imports = 
+  [
+    ../containers/web.nix
+  ];
   # bootloader config
   boot.loader.grub = {
 		enable = true;
@@ -108,6 +112,15 @@
   
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 8000 24800 ];
+
+  # Containers
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = ["ve-+"];
+    externalInterface = "wlp1s0";
+  };
+
   
   # Enable the OpenSSH daemon.
   services.openssh = {

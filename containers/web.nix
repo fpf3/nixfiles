@@ -74,12 +74,12 @@
         ports = [ 22 2222 ];
         enable = true;
         extraConfig = ''
-        Match user git
-        AllowTcpForwarding no
-        AllowAgentForwarding no
-        PasswordAuthentication no
-        PermitTTY no
-        X11Forwarding no
+          Match user git
+            AllowTcpForwarding no
+            AllowAgentForwarding no
+            PasswordAuthentication no
+            PermitTTY no
+            X11Forwarding no
         '';
       };
 
