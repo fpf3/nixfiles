@@ -61,8 +61,11 @@
   services.openssh = {
       enable = true;
       # require public key auth
-      settings.PasswordAuthentication = false;
-      settings.KbdInteractiveAuthentication = false;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+      };
   };
   
   # Open ports in the firewall.
