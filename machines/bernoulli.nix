@@ -3,8 +3,9 @@
   imports = 
   [
     # Containers for server modules
-    ./minecraft_servers.nix
-    ./jellyfin.nix
+    ../containers/minecraft_servers.nix
+    ../containers/jellyfin.nix
+    ../containers/web.nix
   ];
 
   # bootloader config
@@ -18,34 +19,6 @@
 			{ devices = [ "nodev" ]; path = "/boot"; }
 		];
 	};
-
-  fileSystems."/" = {
-  	device = "zpool/root";
-  	fsType = "zfs";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/var" = {
-  	device = "zpool/var";
-  	fsType = "zfs";
-  };
-  
-  fileSystems."/nix" = {
-  	device = "zpool/nix";
-  	fsType = "zfs";
-  };
-  
-  fileSystems."/home" = {
-  	device = "zpool/home";
-  	fsType = "zfs";
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/CC25-5235";
-  	fsType = "vfat";
-  };
-  
-  swapDevices = [ ];
   
   # Kernel configuration
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
