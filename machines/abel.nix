@@ -113,7 +113,7 @@
   services.openssh = {
     enable = true; # We can just leave passwd auth on for the desktop.
     settings = {
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
       PermitRootLogin = "no";
     };
   };

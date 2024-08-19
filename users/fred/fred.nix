@@ -92,6 +92,7 @@ in
           networkmanagerapplet
           pavucontrol
           picom
+          prismlauncher
           pywal
           remmina
           rofi
