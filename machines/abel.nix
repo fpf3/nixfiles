@@ -15,22 +15,6 @@
 			{ devices = [ "nodev" ]; path = "/boot"; }
 		];
 	};
-  
-  fileSystems."/" = {
-  	device = "zpool/root";
-  	fsType = "zfs";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/home" = {
-  	device = "zpool/home";
-  	fsType = "zfs";
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/1AE5-B196";
-  	fsType = "vfat";
-  };
 
   swapDevices = [ ];
   
@@ -39,6 +23,7 @@
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.kernelParams = [ "nohibernate" ]; # ZFS does not support swapfiles. Ensure we don't try to hibernate.
   boot.initrd.kernelModules = [ "amdgpu" ];
+  #boot.initrd.kernelModules = [ "amdgpu" "g_ether" "libcomposite" ];
   #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
 
   services.blueman.enable = true;

@@ -17,6 +17,7 @@ with pkgs; [
   sysstat
   tmux
   unzip
+  usbutils
   tree
   wget
   yubikey-manager
