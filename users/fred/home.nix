@@ -51,7 +51,7 @@
         '';
     };
 
-    vim = (import ./vim.nix) { pkgs=pkgs; };
+    vim = (import ./vim.nix) { pkgs=pkgs; lib=lib; };
   };
 
   dconf = lib.mkIf(dconf != {}) dconf;

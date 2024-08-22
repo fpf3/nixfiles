@@ -8,6 +8,7 @@ with pkgs; [
   htop
   lm_sensors
   ncdu
+  nodejs
   openfortivpn
   pciutils
   python3
