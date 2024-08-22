@@ -10,6 +10,7 @@ with pkgs; [
   ncdu
   openfortivpn
   pciutils
+  python3
   ranger
   ripgrep
   screen

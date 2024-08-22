@@ -3,7 +3,7 @@
 
   imports = 
   [
-    ../containers/web.nix
+    #../containers/web.nix
   ];
   # bootloader config
   boot.loader.grub = {

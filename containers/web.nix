@@ -95,11 +95,15 @@
       services.openssh = {
         ports = [ 22 2222 ];
         enable = true;
+        settings = {
+          PasswordAuthentication = false;
+          PermitRootLogin = "no";
+        };
+
         extraConfig = ''
           Match user git
             AllowTcpForwarding no
             AllowAgentForwarding no
-            PasswordAuthentication no
             PermitTTY no
             X11Forwarding no
         '';
