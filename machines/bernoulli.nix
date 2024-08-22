@@ -6,6 +6,7 @@
     ../containers/minecraft_servers.nix
     ../containers/jellyfin.nix
     ../containers/web.nix
+    #../containers/mail.nix
   ];
 
   # bootloader config

@@ -49,9 +49,9 @@
 
       users.users.manager = {
         isNormalUser = true;
-        home = "/home/fred";
         createHome = true;
         openssh.authorizedKeys.keys = (import ../users/fred/ssh_keys.nix);
+        extraGroups = [ "wheel" "git" "nginx" ];
       };
 
       users.users.git = {
@@ -67,7 +67,29 @@
 
       services.cgit.public = {
         enable = true;
+        nginx.virtualHost = "git.fpf3.net";
         scanPath = "/var/lib/git-server";
+      };
+
+      services.nginx = {
+        enable = true;
+
+        virtualHosts."git.fpf3.net" = {
+          forceSSL = true;
+          enableACME = true;
+        };
+
+        virtualHosts."jellyfin.fpf3.net" = {
+          locations."/".proxyPass = "http://10.10.31.10:8096"; 
+          forceSSL = true;
+          enableACME = true;
+        };
+      };
+
+      security.acme = {
+        acceptTerms = true;
+        defaults.email = "fred@fpf3.net";
+        #defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory"; # faster renew for staging/alpha
       };
 
       services.openssh = {
@@ -89,9 +111,10 @@
 
       environment.systemPackages = with pkgs; [
         git
+        mercurial
       ];
 
-      system.stateVersion = "24.05";
+      system.stateVersion = "23.11";
     };
   };
 }
