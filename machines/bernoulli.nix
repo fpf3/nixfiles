@@ -33,14 +33,17 @@
   
   # Enable the OpenSSH daemon.
   services.openssh = {
-      enable = true;
-      # require public key auth
-      settings = {
-        PasswordAuthentication = false;
-        KbdInteractiveAuthentication = false;
-        PermitRootLogin = "no";
-      };
+    enable = true;
+    # require public key auth
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+    };
   };
+
+  # block persistent freaks
+  services.fail2ban.enable = true;
   
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 5353 8000 ];
