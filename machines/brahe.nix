@@ -67,18 +67,40 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  #services.xserver.displayManager.gdm.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  #services.displayManager.sddm.enable = true;
   services.xserver.windowManager.dwm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
   # kde
-  #services.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  #services.xserver.desktopManager.plasma5.enable = true;
+  #services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  
+  # Set X11 monitor R&R
+
+  services.autorandr.enable = true;
+  services.autorandr.profiles."default" = {
+    fingerprint = { 
+      "HDMI-0" = "00ffffffffffff004c2d5b73000e000101210103808e50780aa833ab5045a5270d4848bdef80714f81c0810081809500a9c0b300d1c008e80030f2705a80b0588a00501d7400001e565e00a0a0a029503020350000000000001a000000fd00184b0f873c000a202020202020000000fc0053414d53554e470a202020202001db02035af05561101f041305142021225d5e5f606566626403125a2f0d5707090707150750570700675400830f0000e2004fe305c3016e030c003000b8442800800102030467d85dc40178800be3060d01e30f01e0e5018b849001000000000000000000000000000000000000000000000000000000000000000000000000000b";
+    };
+
+    config."HDMI-0" = {
+      enable = true;
+      primary = false;
+      scale = { x = 0.5; y = 0.5; };
+      position = "0x0";
+      mode = "3840x2160";
+      rate = "60.00";
+      dpi = 68;
+    };
+  };
+  
+  # Enable natural scrolling
+  services.libinput.touchpad.naturalScrolling = true; # This is for libinput, but it seems to also work in X11
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
