@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
+  #fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://git.fpf3.net/dwm/plain/default.nix") {};
   fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/fpf3/dwm/master/default.nix") {};
   username = "fred";
 in
@@ -52,9 +53,6 @@ in
       # configs
       dconf = {
         settings = {
-          "org/gnome/desktop/background" = {
-            picture-uri-dark = "file://${pkgs.nixos-artwork.wallpapers.nineish-dark-gray.src}";
-          };
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
           };

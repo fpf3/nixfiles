@@ -48,6 +48,10 @@
         bind j select-pane -D
         bind k select-pane -U
         bind l select-pane -R
+        
+        # pane hiding
+        bind-key u command-prompt -p "join pane from:"  "join-pane -s '%%'"
+        bind-key U command-prompt -p "send pane to:"  "join-pane -t '%%'"
         '';
     };
 

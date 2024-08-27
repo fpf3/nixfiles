@@ -2,11 +2,13 @@
 with pkgs; [
   acpi
   bc
+  clang-tools
   fd
   file
-  gnumake
   htop
   lm_sensors
+  man-pages
+  man-pages-posix
   ncdu
   nodejs
   openfortivpn
@@ -18,12 +20,10 @@ with pkgs; [
   sshfs
   sysstat
   tmux
+  tree
   unzip
   usbutils
-  tree
   wget
   yubikey-manager
   zsh
-  man-pages
-  man-pages-posix
 ]
