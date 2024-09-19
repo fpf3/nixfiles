@@ -11,24 +11,7 @@
 		];
 	};
   
-  fileSystems."/" = {
-  	device = "zpool/root";
-  	fsType = "zfs";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/home" = {
-  	device = "zpool/home";
-  	fsType = "zfs";
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/5201-0A77";
-  	fsType = "vfat";
-  };
-
   swapDevices = [ ];
-  
 
   # Kernel configuration
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
