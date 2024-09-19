@@ -19,20 +19,8 @@
 		{ devices = [ "nodev" ]; path = "/boot"; }
 	];
   };
-  
-  fileSystems."/" = {
-  	device = "/dev/disk/by-uuid/e0cfd9cd-c314-4767-95d2-e93e25043929";
-  	fsType = "ext4";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/EB2C-760E";
-  	fsType = "vfat";
-  };
 
   swapDevices = [ ];
-  
 
   # Kernel configuration
   boot.kernelPackages = pkgs.linuxPackages; # default

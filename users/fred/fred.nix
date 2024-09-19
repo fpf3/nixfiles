@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
   #fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://git.fpf3.net/dwm/plain/default.nix") {};
   fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/fpf3/dwm/master/default.nix") {};
   username = "fred";
@@ -8,7 +7,7 @@ in
 {
     imports = 
     [
-      (import "${home-manager}/nixos")
+      <home-manager/nixos>
     ];
     
     users.users.fred = (import ./user.nix) { pkgs=pkgs; };
@@ -63,7 +62,7 @@ in
         enable = true;
         theme = {
           name = "Adwaita-dark";
-          package = pkgs.gnome.gnome-themes-extra;
+          package = pkgs.gnome-themes-extra;
         };
       };
       
@@ -72,7 +71,7 @@ in
         x11.enable = true;
         name = "Adwaita";
         size=16;
-        package = pkgs.gnome.adwaita-icon-theme;
+        package = pkgs.adwaita-icon-theme;
       };
 
       # installed packages
@@ -83,7 +82,7 @@ in
           element-desktop
           feh
           firefox
-          gnome.gnome-tweaks
+          gnome-tweaks
           imagemagick
           lukesmithxyz-st
           mumble

@@ -31,7 +31,7 @@
   # peripherals configuration
   services.xserver.videoDrivers = [ "amdgpu" ];
   hardware = {
-    opengl.enable = true;
+    graphics.enable = true;
     pulseaudio.enable = false;
   };
 
@@ -52,7 +52,7 @@
   #services.fprintd.tod.enable = true;
   #services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
   security.pam.services.gdm-fingerprint.fprintAuth = true; # "/etc/pam.d/gdm-fingerprint" is  not created by default
-  security.pam.services.login.fprintAuth = true; 
+  security.pam.services.login.fprintAuth = false;
   security.pam.services.sudo.fprintAuth = false;
   security.pam.services.su.fprintAuth = false;
 

@@ -11,24 +11,7 @@
 		];
 	};
   
-  fileSystems."/" = {
-  	device = "zpool/root";
-  	fsType = "zfs";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/home" = {
-  	device = "zpool/home";
-  	fsType = "zfs";
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/5201-0A77";
-  	fsType = "vfat";
-  };
-
   swapDevices = [ ];
-  
 
   # Kernel configuration
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
@@ -41,7 +24,7 @@
   # peripherals configuration
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware = {
-    opengl.enable = true;
+    graphics.enable = true;
     nvidia = {
         modesetting.enable = true; # required
 
@@ -50,7 +33,7 @@
             finegrained = false; # Turn off GPU when not in use. "Turing" or newer. Can't use this, because we don't have integrated graphix
         };
         
-        open = false; # Open-source module (not nouveau, the upstream NVIDIA one...)
+        open = true; # Open-source module (not nouveau, the upstream NVIDIA one...)
 
         nvidiaSettings = true; # nvidia-settings manager
         
