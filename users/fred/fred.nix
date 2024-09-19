@@ -2,6 +2,7 @@
 let
   #fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://git.fpf3.net/dwm/plain/default.nix") {};
   fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/fpf3/dwm/master/default.nix") {};
+  fpf3_st = pkgs.callPackage ../../custom_pkgs/st/st.nix {};
   username = "fred";
 in
 {
@@ -84,7 +85,7 @@ in
           firefox
           gnome-tweaks
           imagemagick
-          lukesmithxyz-st
+          #lukesmithxyz-st
           mumble
           networkmanagerapplet
           pavucontrol
@@ -104,6 +105,7 @@ in
       ])
       ++ [
         fpf3_dwm
+        fpf3_st
       ]
       ++ (with (pkgs.callPackage ../../scripts/scripts.nix {}); [
           # Some helper scripts for DWM.

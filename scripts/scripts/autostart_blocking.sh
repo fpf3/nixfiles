@@ -1,7 +1,7 @@
 #!/bin/sh
 autorandr --load default
 
-if [ -e $HOME/.Xresources]; then
+if [ -e $HOME/.Xresources ]; then
     xrdb $HOME/.Xresources
 fi
 
