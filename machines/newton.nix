@@ -33,7 +33,7 @@
             finegrained = false; # Turn off GPU when not in use. "Turing" or newer. Can't use this, because we don't have integrated graphix
         };
         
-        open = false; # Open-source module (not nouveau, the upstream NVIDIA one...)
+        open = true; # Open-source module (not nouveau, the upstream NVIDIA one...)
 
         nvidiaSettings = true; # nvidia-settings manager
         
