@@ -20,7 +20,7 @@
   
 
   # Kernel configuration
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ "nohibernate" ]; # ZFS does not support swapfiles. Ensure we don't try to hibernate.
   boot.initrd.kernelModules = [ "amdgpu" ];
   #boot.initrd.kernelModules = [ "amdgpu" "g_ether" "libcomposite" ];

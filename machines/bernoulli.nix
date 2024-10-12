@@ -22,7 +22,7 @@
 	};
   
   # Kernel configuration
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ "nohibernate" ];
 
   # mdadm RAID
