@@ -14,7 +14,7 @@
   swapDevices = [ ];
 
   # Kernel configuration
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ "nohibernate" ]; # ZFS does not support swapfiles. Ensure we don't try to hibernate.
   #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
   boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
