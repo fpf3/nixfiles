@@ -26,6 +26,8 @@
   #boot.initrd.kernelModules = [ "amdgpu" "g_ether" "libcomposite" ];
   #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
 
+  boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
+
   services.blueman.enable = true;
 
   # peripherals configuration

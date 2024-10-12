@@ -1,8 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   #fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://git.fpf3.net/dwm/plain/default.nix") {};
-  fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/fpf3/dwm/master/default.nix") {};
-  fpf3_st = pkgs.callPackage ../../custom_pkgs/st/st.nix {};
+  fpf3_dwm = pkgs.callPackage ../../custom_pkgs/dwm/default.nix {};
+  fpf3_st = pkgs.callPackage ../../custom_pkgs/st/default.nix {};
   username = "fred";
 in
 {
@@ -78,7 +78,7 @@ in
       # installed packages
 
       userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
-      ++ (with pkgs; [
+      ++ (with pkgs; [ # Upstream packages
           dmenu
           element-desktop
           feh
@@ -103,12 +103,11 @@ in
           xclip
           yubioath-flutter
       ])
-      ++ [
+      ++ [ # Custom packages
         fpf3_dwm
         fpf3_st
       ]
-      ++ (with (pkgs.callPackage ../../scripts/scripts.nix {}); [
-          # Some helper scripts for DWM.
+      ++ (with (pkgs.callPackage ../../scripts/scripts.nix {}); [ # scripts
           as
           as_blocking
           snip
