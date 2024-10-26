@@ -16,10 +16,9 @@ in
             coc-nvim
             coc-rust-analyzer
             coc-clangd
-            coc-python
         ];
         extraConfig = builtins.replaceStrings
-          [ "COC_KEYBINDS_PATH"]
-          [ coc_keybinds]
+          ["COC_KEYBINDS_PATH"]
+          [coc_keybinds]
           (lib.readFile ./vimrc);
 }

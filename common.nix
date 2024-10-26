@@ -17,6 +17,7 @@
       "steam"
       "steam-original"
       "steam-run"
+      "steam-unwrapped"
     ];
 
   # List packages installed in system profile.
