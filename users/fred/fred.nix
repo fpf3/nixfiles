@@ -102,6 +102,7 @@ in
           vlc
           xclip
           yubioath-flutter
+          zathura
       ])
       ++ [ # Custom packages
         fpf3_dwm
