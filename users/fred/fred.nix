@@ -85,6 +85,8 @@ in
           firefox
           gnome-tweaks
           imagemagick
+          kicad
+          libreoffice
           #lukesmithxyz-st
           mumble
           networkmanagerapplet

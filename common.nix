@@ -23,6 +23,7 @@
   # List packages installed in system profile.
    environment.systemPackages = with pkgs; [
      wget
+     xorg.xhost
    ];
 
   # fonts
