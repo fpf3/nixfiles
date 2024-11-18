@@ -46,22 +46,6 @@
     };
   };
 
-  # Possible polkit fix for yubikey
-  security.polkit.extraConfig = ''
-    polkit.addRule(function(action, subject) {
-      if (action.id == "org.debian.pcsc-lite.access_card") {
-        return polkit.Result.YES;
-      }
-    });
-
-    polkit.addRule(function(action, subject) {
-      if (action.id == "org.debian.pcsc-lite.access_pcsc") {
-        return polkit.Result.YES;
-      }
-    });
-  '';
-
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
