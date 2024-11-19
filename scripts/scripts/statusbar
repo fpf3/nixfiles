@@ -35,6 +35,9 @@ bat_status() {
             if [[ $acpi_out == *"Charging"* ]]; then
                 bat_percent=`echo $acpi_out | awk '{print $4 $5}' | sed -e 's/,/ /'`
                 batsym="🔌"
+            elif [[ $acpi_out == *"charging"* ]]; then
+                bat_percent=`echo $acpi_out | awk '{print $5}'`
+                batsym="🔌"
             elif [ $bat_percent -lt "20" ]; then 
                 bat_percent=`echo $acpi_out | awk '{print $4 $5}' | sed -e 's/,/ /'`
                 batsym="🪫"
