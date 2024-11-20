@@ -63,12 +63,17 @@
         openssh.authorizedKeys.keys = (import ../users/fred/ssh_keys.nix);
       };
 
+      users.users.cgit = {
+        extraGroups = [ "git" ];
+      };
+
       users.groups.git = {};
 
       services.cgit.public = {
         enable = true;
         nginx.virtualHost = "git.fpf3.net";
         scanPath = "/var/lib/git-server";
+        user = "cgit";
       };
 
       services.nginx = {
@@ -114,7 +119,7 @@
         mercurial
       ];
 
-      system.stateVersion = "23.11";
+      system.stateVersion = "24.05";
     };
   };
 }
