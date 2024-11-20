@@ -14,7 +14,7 @@
   swapDevices = [ ];
 
   # Kernel configuration
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ "nohibernate" ]; # ZFS does not support swapfiles. Ensure we don't try to hibernate.
   #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
   boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
@@ -43,11 +43,14 @@
   };
 
   networking.hostName = "newton";
+
+  networking.interfaces.enp6s0.wakeOnLan.enable = true;
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.sessionCommands = "xhost +local:";
   services.xserver.desktopManager.gnome.enable = true;
   services.xserver.windowManager.dwm.enable = true;
 
@@ -79,6 +82,30 @@
       mode = "1920x1080";
       rotate = "right";
       rate = "144.00";
+    };
+  };
+
+  services.autosuspend = {
+    enable = true;
+    settings = {
+      interval = 1; # check every second
+      idle_time = 30; # down for 30 seconds? shut 'er down
+    };
+    
+    checks = {
+      RemoteUsers = {
+        enabled = true;
+        class = "ActiveConnection";
+        ports = "22";
+      };
+
+      LocalUsers = {
+        enabled = true;
+        class = "XIdleTime";
+        timeout = 7200; # 2 hr timeout
+        method = "sockets";
+        ignore_users = "gdm";
+      };
     };
   };
 

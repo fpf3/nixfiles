@@ -17,11 +17,13 @@
       "steam"
       "steam-original"
       "steam-run"
+      "steam-unwrapped"
     ];
 
   # List packages installed in system profile.
    environment.systemPackages = with pkgs; [
      wget
+     xorg.xhost
    ];
 
   # fonts

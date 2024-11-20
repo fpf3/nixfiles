@@ -30,22 +30,29 @@ temp_status() {
 bat_status() {
     case $chassis_type in
         9|10|11|14) # Laptop | Notebook | Hand Held | Sub Notebook
-            bat_percent=`acpi | awk '{print $4}' | grep -Po '\d+'`
-            if [[ `acpi` == *"Charging"* ]]; then
-                batsym="⚡"
+            acpi_out=`acpi`
+            bat_percent=`echo $acpi_out | awk '{print $4}' | grep -Po '\d+'`
+            if [[ $acpi_out == *"Charging"* ]]; then
+                bat_percent=`echo $acpi_out | awk '{print $4 $5}' | sed -e 's/,/ /'`
+                batsym="🔌"
+            elif [[ $acpi_out == *" charging"* ]]; then # plugged in, but we're at 100%
+                bat_percent=`echo $acpi_out | awk '{print $5}'`
+                batsym="🔌"
             elif [ $bat_percent -lt "20" ]; then 
+                bat_percent=`echo $acpi_out | awk '{print $4 $5}' | sed -e 's/,/ /'`
                 batsym="🪫"
             else
+                bat_percent=`echo $acpi_out | awk '{print $4}' | sed -e 's/,/ /'`
                 batsym="🔋"
             fi
 
-            echo "$batsym: $bat_percent%"
+            echo "$batsym: $bat_percent"
         ;;
     esac
 }
 
 render() {
-    echo "`temp_status` `cpu_usage` `mem_usage``bat_status` | $(date +"$datetime_fmt")" 
+    echo "`temp_status` `cpu_usage` `mem_usage` `bat_status` | $(date +"$datetime_fmt")" 
 }
 
 

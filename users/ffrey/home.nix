@@ -7,13 +7,13 @@
     git = {
         enable = true;
         userName = "Fred Frey";
-        userEmail = "fred@fpf3.net";
+        userEmail = "f.frey@qvii.com";
     };
 
     mercurial = {
         enable = true;
         userName = "Fred Frey";
-        userEmail = "fred@fpf3.net";
+        userEmail = "f.frey@qvii.com";
     };
 
     zsh = {
@@ -66,4 +66,8 @@
   gtk = lib.mkIf(gtk != {}) gtk;
   home.pointerCursor = lib.mkIf (pointerCursor != {}) pointerCursor;
   home.packages = userPackages;
+
+  programs.zsh.sessionVariables = {
+    QT_QPA_PLATFORM_PLUGIN_PATH= with pkgs; "${qt5.qtbase.bin}/lib/qt-${qt5.qtbase.version}/plugins/platforms";
+  };
 }

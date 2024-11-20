@@ -20,11 +20,15 @@
   
 
   # Kernel configuration
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.kernelParams = [ "nohibernate" ]; # ZFS does not support swapfiles. Ensure we don't try to hibernate.
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  # No kernel packages selected -> LTS Kernel
+  boot.kernelParams = [ 
+    "nohibernate" # ZFS does not support swapfiles. 
+    "zfs.zfs_arc_max=17179869184" # Set max ARC size to 16GB
+  ]; 
+  boot.initrd.kernelModules = [ "amdgpu" "msr" ];
   #boot.initrd.kernelModules = [ "amdgpu" "g_ether" "libcomposite" ];
-  #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
+
+  boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
 
   services.blueman.enable = true;
 
