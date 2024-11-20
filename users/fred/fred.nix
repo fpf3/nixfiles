@@ -45,6 +45,7 @@ in
     };
 
     # Home Manager
+    home-manager.backupFileExtension = "homeManagerBackup";
     home-manager.users.fred = (import ./home.nix) { 
       pkgs=pkgs; 
       lib=lib;

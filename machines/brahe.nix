@@ -1,15 +1,5 @@
 { config, lib, pkgs, ... }:
 {
-  nixpkgs.config.allowUnfreePredicate = pkg:
-  builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-      "steam"
-      "steam-original"
-      "steam-run"
-    ];
-
   # bootloader config
   boot.loader.grub = {
 	enable = true;
@@ -19,20 +9,6 @@
 		{ devices = [ "nodev" ]; path = "/boot"; }
 	];
   };
-  
-  fileSystems."/" = {
-  	device = "/dev/disk/by-uuid/328a552a-cd07-42cd-b32e-0decb0f4a6c0";
-  	fsType = "ext4";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/F620-F4DF";
-  	fsType = "vfat";
-  };
-
-  swapDevices = [ ];
-  
 
   # Kernel configuration
   boot.kernelPackages = pkgs.linuxPackages; # default
@@ -49,7 +25,7 @@
             finegrained = false; # Turn off GPU when not in use. "Turing" or newer. Can't use this, because we don't have integrated graphix
         };
         
-        open = true; # Open-source module (not nouveau, the upstream NVIDIA one...)
+        open = false; # Open-source module (not nouveau, the upstream NVIDIA one...)
 
         nvidiaSettings = true; # nvidia-settings manager
         
@@ -67,14 +43,14 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  #services.xserver.displayManager.gdm.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.xserver.windowManager.dwm.enable = true;
-  #services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  #services.displayManager.sddm.enable = true;
+  #services.xserver.windowManager.dwm.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
 
   # kde
   #services.xserver.desktopManager.plasma5.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
