@@ -7,6 +7,8 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
+  nix.settings.experimental-features = [ "nix-command" ];
+
   # list of unfree $oftware to allow
   nixpkgs.config.allowUnfreePredicate = pkg:
   builtins.elem (lib.getName pkg) [
