@@ -7,7 +7,7 @@
   # Set your time zone.
   time.timeZone = "America/New_York";
 
-  nix.settings.experimental-features = [ "nix-command" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # list of unfree $oftware to allow
   nixpkgs.config.allowUnfreePredicate = pkg:
