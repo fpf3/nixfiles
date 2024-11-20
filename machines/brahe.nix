@@ -61,18 +61,17 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # GNOME
   services.xserver.displayManager.gdm.enable = true;
-  #services.displayManager.sddm.enable = true;
-  #services.xserver.windowManager.dwm.enable = true;
-  services.xserver.desktopManager.cinnamon.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+
+  # dwm
+  services.xserver.windowManager.dwm.enable = true;
 
   # kde
-  #services.xserver.desktopManager.plasma5.enable = true;
+  #services.displayManager.sddm.enable = true;
   #services.desktopManager.plasma6.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
   
   # Set X11 monitor R&R
 
@@ -85,7 +84,7 @@
     config."HDMI-0" = {
       enable = true;
       primary = false;
-      scale = { x = 0.5; y = 0.5; };
+      scale = { x = 0.7; y = 0.7; };
       position = "0x0";
       mode = "3840x2160";
       rate = "60.00";

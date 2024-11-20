@@ -8,6 +8,7 @@ in
     imports = 
     [
       <home-manager/nixos>
+      (import ../../frags/gamer/gamer.nix {pkgs=pkgs; lib=lib; config=config; withGui=withGui;})
     ];
     
     users.users.fred = (import ./user.nix) { pkgs=pkgs; };
@@ -31,14 +32,6 @@ in
     # give me the man pages... christ
     documentation.dev.enable = true;
 
-    # steam system config
-    programs.steam = lib.mkIf(withGui) {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-    };
-    
     qt = lib.mkIf(withGui) {
       enable = true;
       platformTheme = "gnome";
@@ -86,7 +79,8 @@ in
       ++(import ../../frags/pkgs/general_dev.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/py_dev.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/scripts.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; });
+      ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; })
+      ++(import ../../frags/gamer/pkgs.nix { pkgs=pkgs; });
     };
     
 

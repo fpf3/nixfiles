@@ -57,13 +57,8 @@
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.sessionCommands = "xhost +local:";
-  services.xserver.desktopManager.gnome.enable = true;
+  services.gnome.enable = true;
   services.xserver.windowManager.dwm.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Set X11 monitor R&R
 

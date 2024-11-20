@@ -35,6 +35,9 @@
     #joypixels # figure out how to accept license declaratively
   ];
 
+  # Configure keymap in X11
+  services.xserver.xkb.layout = "us";
+
   # enable avahi
   services.avahi = {
     enable = true;
