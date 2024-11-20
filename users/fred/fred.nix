@@ -46,9 +46,12 @@ in
     };
 
     # Home Manager
-    home-manager.users.fred = (import ./home.nix) { 
+    home-manager.users.fred = (import ../../frags/home/home.nix) { 
       pkgs=pkgs; 
       lib=lib;
+
+      fullName = "Fred Frey";
+      emailAddr = "fred@fpf3.net";
 
       # configs
       dconf = lib.mkIf(withGui) {

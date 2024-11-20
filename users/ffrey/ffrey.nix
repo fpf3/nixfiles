@@ -18,9 +18,16 @@ in
     documentation.dev.enable = true;
 
     # Home Manager
-    home-manager.users.ffrey = (import ./home.nix) { 
+    home-manager.users.ffrey = (import ../../frags/home/home.nix) { 
       pkgs=pkgs; 
       lib=lib;
+      
+      fullName = "Fred Frey";
+      emailAddr = "f.frey@qvii.com";
+
+      envVars = {
+        QT_QPA_PLATFORM_PLUGIN_PATH = with pkgs; "${qt5.qtbase.bin}/lib/qt-${qt5.qtbase.version}/plugins/platforms";
+      };
 
       # configs
       gtk = {

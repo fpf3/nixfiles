@@ -1,22 +1,33 @@
-{ pkgs, lib, userPackages, dconf ? {}, gtk ? {}, pointerCursor ? {}, ...}:
+{ 
+  pkgs, 
+  lib, 
+  userPackages, 
+  fullName ? "", 
+  emailAddr ? "", 
+  dconf ? {}, 
+  gtk ? {}, 
+  pointerCursor ? {}, 
+  envVars ? {}, 
+  ...
+}:
 {
   home.stateVersion = "24.05"; # Do I bump this, or keep it the same?
 
   # configs
   programs = {
-    git = {
+    git = lib.mkIf(fullName != "") {
         enable = true;
-        userName = "Fred Frey";
-        userEmail = "fred@fpf3.net";
+        userName = fullName;
+        userEmail = emailAddr;
     };
 
-    mercurial = {
+    mercurial = lib.mkIf(fullName != "") {
         enable = true;
-        userName = "Fred Frey";
-        userEmail = "fred@fpf3.net";
+        userName = fullName;
+        userEmail = emailAddr;
     };
 
-    zsh = (import ../../frags/zsh/zsh.nix);
+    zsh = (import ../../frags/zsh/zsh.nix) { lib=lib; envVars = envVars; };
 
     tmux = (import ../../frags/tmux/tmux.nix);
 
@@ -26,6 +37,8 @@
   xresources.properties = {
     "st.alpha" = "1.0";
   };
+
+  programs.bash.sessionVariables = lib.mkIf(envVars != {}) envVars;
 
   dconf = lib.mkIf(dconf != {}) dconf;
   gtk = lib.mkIf(gtk != {}) gtk;

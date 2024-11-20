@@ -1,3 +1,4 @@
+{lib, envVars ? {}}:
 {
   enable = true;
   #antidote.enable = true;
@@ -11,4 +12,6 @@
     #NIX_AUTO_RUN = "1"
     PATH=$PATH:/home/fred/bin
   '';
+
+  sessionVariables = lib.mkIf(envVars != {}) envVars;
 }
