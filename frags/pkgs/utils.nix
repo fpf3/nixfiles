@@ -1,19 +1,15 @@
-{pkgs, ...}:
+{ pkgs }:
 with pkgs; [
   acpi
   bc
-  clang-tools
   fd
   file
   htop
   lm_sensors
-  man-pages
-  man-pages-posix
+  lsb-release
   ncdu
-  nodejs
   openfortivpn
   pciutils
-  python3
   ranger
   ripgrep
   screen
@@ -23,7 +19,5 @@ with pkgs; [
   tree
   unzip
   usbutils
-  wget
   yubikey-manager
-  zsh
 ]

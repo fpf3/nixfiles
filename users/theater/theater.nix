@@ -59,17 +59,10 @@ in
 
       # installed packages
 
-      userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
-      ++ [
-          pkgs.dmenu
-          pkgs.element-desktop
-          pkgs.feh
-          pkgs.firefox
-          pkgs.remmina
-          pkgs.thunderbird
-          pkgs.vlc
-          pkgs.yubioath-flutter
-      ];
+      userPackages = 
+        (import ../../frags/pkgs/custom.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/gui.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; });
     };
     
 

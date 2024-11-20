@@ -15,6 +15,11 @@
       lib=lib; 
      
      # installed packages
-      userPackages = (import ./headless_pkgs.nix) { pkgs=pkgs; };
+      userPackages = 
+        (import ../../frags/pkgs/custom.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/general_dev.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/py_dev.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/scripts.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; });
     };
 }

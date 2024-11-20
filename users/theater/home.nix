@@ -4,42 +4,11 @@
 
   # configs
   programs = {
-    zsh = {
-        enable = true;
-        #antidote.enable = true;
-        #antidote.plugins = [ ohmyzsh/ohmyzsh ];
-        oh-my-zsh = {
-            enable = true;
-            theme = "half-life";
-        };
-        autocd = true;
-        initExtra = ''
-          #NIX_AUTO_RUN = "1"
-          PATH=$PATH:/home/fred/bin
-        '';
-    };
+    zsh = (import ../../frags/zsh/zsh.nix);
     
-    tmux = {
-      enable = true;
-      clock24 = true;
-      mouse = true;
-      keyMode = "vi";
-      terminal = "xterm-256color";
-      extraConfig = ''
-        # split panes using | and -
-        bind | split-window -h
-        bind - split-window -v
-        # reload config
-        bind r source-file ~/.tmux.conf
-        # pane selection
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
-        '';
-    };
+    tmux = (import ../../frags/tmux/tmux.nix);
 
-    vim = (import ./vim.nix) { pkgs=pkgs; };
+    vim = (import ../../frags/vim/vim.nix) { pkgs=pkgs; };
   };
 
   dconf = lib.mkIf(dconf != {}) dconf;

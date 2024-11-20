@@ -1,0 +1,28 @@
+{pkgs}:
+with pkgs; [
+          dmenu
+          element-desktop
+          feh
+          firefox
+          gnome-tweaks
+          imagemagick
+          #kicad
+          libreoffice
+          mumble
+          networkmanagerapplet
+          pavucontrol
+          picom
+          prismlauncher
+          pywal
+          remmina
+          rofi
+          rofimoji
+          scrot
+          synergy
+          thunderbird
+          vesktop
+          vlc
+          xclip
+          yubioath-flutter
+          zathura
+]
