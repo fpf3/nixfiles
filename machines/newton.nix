@@ -2,6 +2,8 @@
 {
   imports =
   [
+    # fragments
+    ../frags/autosuspend/autosuspend.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
@@ -89,8 +91,6 @@
       rate = "144.00";
     };
   };
-
-  services.autosuspend = (import ../frags/autosuspend/autosuspend.nix);
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
