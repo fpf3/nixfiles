@@ -1,8 +1,5 @@
 { config, lib, pkgs, ... }:
 let
-  #fpf3_dwm = pkgs.callPackage (builtins.fetchurl "https://git.fpf3.net/dwm/plain/default.nix") {};
-  fpf3_dwm = pkgs.callPackage ../../custom_pkgs/dwm/default.nix {};
-  fpf3_st = pkgs.callPackage ../../custom_pkgs/st/default.nix {};
   username = "ffrey";
 in
 {
@@ -21,9 +18,16 @@ in
     documentation.dev.enable = true;
 
     # Home Manager
-    home-manager.users.ffrey = (import ./home.nix) { 
+    home-manager.users.ffrey = (import ../../frags/home/home.nix) { 
       pkgs=pkgs; 
       lib=lib;
+      
+      fullName = "Fred Frey";
+      emailAddr = "f.frey@qvii.com";
+
+      envVars = {
+        QT_QPA_PLATFORM_PLUGIN_PATH = with pkgs; "${qt5.qtbase.bin}/lib/qt-${qt5.qtbase.version}/plugins/platforms";
+      };
 
       # configs
       gtk = {
@@ -36,23 +40,11 @@ in
 
       # installed packages
 
-      userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
-      ++ (with pkgs; [ # Upstream packages
-          feh
-          imagemagick
-          scrot
-          xclip
-          yubioath-flutter
-      ])
-      ++ [ # Custom packages
-        fpf3_dwm
-        fpf3_st
-      ]
-      ++ (with (pkgs.callPackage ../../scripts/scripts.nix {}); [ # scripts
-          snip
-          statusbar
-          xsandbox
-      ]);
+      userPackages = 
+        (import ../../frags/pkgs/general_dev.nix { pkgs=pkgs; })
+      ++(import ../../frags/py_dev.nix { pkgs=pkgs; })
+      ++(import ../../frags/scripts.nix { pkgs=pkgs; })
+      ++(import ../../frags/utils.nix { pkgs=pkgs; });
     };
     
 

@@ -1,5 +1,13 @@
 { config, lib, pkgs, ... }:
 {
+  imports =
+  [
+    # fragments
+    ../frags/autosuspend/autosuspend.nix
+    # User-specific config
+    (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
+    (import ../users/theater/theater.nix {pkgs=pkgs; config=config; lib=lib;})
+  ];
   nixpkgs.config.allowUnfreePredicate = pkg:
   builtins.elem (lib.getName pkg) [
       "nvidia-x11"
@@ -19,20 +27,6 @@
 		{ devices = [ "nodev" ]; path = "/boot"; }
 	];
   };
-  
-  fileSystems."/" = {
-  	device = "/dev/disk/by-uuid/328a552a-cd07-42cd-b32e-0decb0f4a6c0";
-  	fsType = "ext4";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/F620-F4DF";
-  	fsType = "vfat";
-  };
-
-  swapDevices = [ ];
-  
 
   # Kernel configuration
   boot.kernelPackages = pkgs.linuxPackages; # default
@@ -69,7 +63,7 @@
 
   services.xserver.displayManager.gdm.enable = true;
   #services.displayManager.sddm.enable = true;
-  services.xserver.windowManager.dwm.enable = true;
+  #services.xserver.windowManager.dwm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
   # kde
@@ -115,6 +109,15 @@
   
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 8000 ];
+  
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true; # We can just leave passwd auth on for the desktop.
+    settings = {
+      PasswordAuthentication = true;
+      PermitRootLogin = "no";
+    };
+  };
   
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -7,6 +7,9 @@
     ../containers/jellyfin.nix
     ../containers/web.nix
     #../containers/mail.nix
+    
+    # User-specific config
+    (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib; withGui=false;})
   ];
 
   # bootloader config

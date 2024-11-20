@@ -98,9 +98,6 @@
         ] options.services.maddy.config.default;
         # Reading secrets from a file. Do not use this example in production
         # since it stores the keys world-readable in the Nix store.
-        secrets = [ "${pkgs.writeText "secrets" ''
-        GANDI_API_KEY=1234
-        ''}" ];
 
         ensureAccounts = [
           "fred@mail2.fpf3.net"
@@ -133,7 +130,7 @@
         mercurial
       ];
 
-      system.stateVersion = "23.11";
+      system.stateVersion = "24.05";
     };
   };
 }

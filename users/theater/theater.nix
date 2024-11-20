@@ -1,11 +1,8 @@
 { config, lib, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-in
 {
     imports = 
     [
-      (import "${home-manager}/nixos")
+      <home-manager/nixos>
     ];
     
     users.users.theater = (import ./user.nix) { pkgs=pkgs; };
@@ -33,7 +30,7 @@ in
     };
 
     # Home Manager
-    home-manager.users.theater = (import ./home.nix) { 
+    home-manager.users.theater = (import ../../frags/home/home.nix) { 
       pkgs=pkgs; 
       lib=lib;
 
@@ -54,22 +51,15 @@ in
         x11.enable = true;
         name = "Adwaita";
         size=16;
-        package = pkgs.gnome.adwaita-icon-theme;
+        package = pkgs.adwaita-icon-theme;
       };
 
       # installed packages
 
-      userPackages = ((import ./headless_pkgs.nix) { pkgs=pkgs; })
-      ++ [
-          pkgs.dmenu
-          pkgs.element-desktop
-          pkgs.feh
-          pkgs.firefox
-          pkgs.remmina
-          pkgs.thunderbird
-          pkgs.vlc
-          pkgs.yubioath-flutter
-      ];
+      userPackages = 
+        (import ../../frags/pkgs/custom.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/gui.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; });
     };
     
 
