@@ -25,20 +25,6 @@
 		{ devices = [ "nodev" ]; path = "/boot"; }
 	];
   };
-  
-  fileSystems."/" = {
-  	device = "/dev/disk/by-uuid/328a552a-cd07-42cd-b32e-0decb0f4a6c0";
-  	fsType = "ext4";
-  	neededForBoot = true;
-  };
-  
-  fileSystems."/boot" = {
-  	device = "/dev/disk/by-uuid/F620-F4DF";
-  	fsType = "vfat";
-  };
-
-  swapDevices = [ ];
-  
 
   # Kernel configuration
   boot.kernelPackages = pkgs.linuxPackages; # default
@@ -75,7 +61,7 @@
 
   services.xserver.displayManager.gdm.enable = true;
   #services.displayManager.sddm.enable = true;
-  services.xserver.windowManager.dwm.enable = true;
+  #services.xserver.windowManager.dwm.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
 
   # kde

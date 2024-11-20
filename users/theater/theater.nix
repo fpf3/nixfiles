@@ -1,11 +1,8 @@
 { config, lib, pkgs, ... }:
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/release-24.05.tar.gz";
-in
 {
     imports = 
     [
-      (import "${home-manager}/nixos")
+      <home-manager/nixos>
     ];
     
     users.users.theater = (import ./user.nix) { pkgs=pkgs; };
@@ -54,7 +51,7 @@ in
         x11.enable = true;
         name = "Adwaita";
         size=16;
-        package = pkgs.gnome.adwaita-icon-theme;
+        package = pkgs.adwaita-icon-theme;
       };
 
       # installed packages
