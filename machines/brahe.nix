@@ -4,7 +4,7 @@
   [
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
-    (import ../users/fred/theater.nix {pkgs=pkgs; config=config; lib=lib;})
+    (import ../users/theater/theater.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
   nixpkgs.config.allowUnfreePredicate = pkg:
   builtins.elem (lib.getName pkg) [

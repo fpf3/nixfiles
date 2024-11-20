@@ -30,7 +30,7 @@
     };
 
     # Home Manager
-    home-manager.users.theater = (import ./home.nix) { 
+    home-manager.users.theater = (import ../../frags/home/home.nix) { 
       pkgs=pkgs; 
       lib=lib;
 
