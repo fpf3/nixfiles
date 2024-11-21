@@ -5,7 +5,7 @@
       # include NixOS-WSL modules
       <nixos-wsl/modules>
       # User-specific config
-      (import ../users/ffrey/ffrey.nix {pkgs=pkgs; config=config; lib=lib})
+      (import ../users/ffrey/ffrey.nix {pkgs=pkgs; config=config; lib=lib;})
     ];
 
   swapDevices = [ ];

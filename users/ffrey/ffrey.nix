@@ -42,9 +42,9 @@ in
 
       userPackages = 
         (import ../../frags/pkgs/general_dev.nix { pkgs=pkgs; })
-      ++(import ../../frags/py_dev.nix { pkgs=pkgs; })
-      ++(import ../../frags/scripts.nix { pkgs=pkgs; })
-      ++(import ../../frags/utils.nix { pkgs=pkgs; });
+      ++(import ../../frags/pkgs/py_dev.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/scripts.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; });
     };
     
 
