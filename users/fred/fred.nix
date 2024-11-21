@@ -80,7 +80,9 @@ in
       ++(import ../../frags/pkgs/py_dev.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/scripts.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; })
-      ++(import ../../frags/gamer/pkgs.nix { pkgs=pkgs; });
+      ++(import ../../frags/pkgs/gui_utils.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/typesetting.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/gamer.nix { pkgs=pkgs; });
     };
     
 

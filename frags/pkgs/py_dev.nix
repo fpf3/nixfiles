@@ -12,6 +12,7 @@ with pkgs; [
         pandas
         scipy
         sympy
+        wxpython
       ]
     )
   )

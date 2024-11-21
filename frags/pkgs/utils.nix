@@ -5,6 +5,7 @@ with pkgs; [
   fd
   file
   htop
+  imagemagick
   lm_sensors
   lsb-release
   ncdu
@@ -20,4 +21,4 @@ with pkgs; [
   unzip
   usbutils
   yubikey-manager
-]
+] 
