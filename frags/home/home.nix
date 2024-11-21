@@ -27,11 +27,11 @@
         userEmail = emailAddr;
     };
 
-    zsh = (import ../../frags/zsh/zsh.nix) { lib=lib; envVars = envVars; };
+    zsh = (import ../zsh/zsh.nix) { lib=lib; envVars = envVars; };
 
-    tmux = (import ../../frags/tmux/tmux.nix);
+    tmux = (import ../tmux/tmux.nix);
 
-    vim = (import ../../frags/vim/vim.nix) { pkgs=pkgs; lib=lib; };
+    vim = (import ../vim/vim.nix) { pkgs=pkgs; lib=lib; };
   };
 
   xresources.properties = {
