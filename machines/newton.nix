@@ -57,7 +57,7 @@
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
-  services.gnome.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
   services.xserver.windowManager.dwm.enable = true;
 
   # Set X11 monitor R&R
