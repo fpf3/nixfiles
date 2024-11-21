@@ -20,4 +20,4 @@ with pkgs; [
   unzip
   usbutils
   yubikey-manager
-]
+] 
