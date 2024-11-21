@@ -5,4 +5,5 @@ with pkgs; [
   man-pages
   man-pages-posix
   nodejs
+  rcs # merge
 ]
