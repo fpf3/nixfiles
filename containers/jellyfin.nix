@@ -87,24 +87,23 @@
 
       services.samba = {
         enable = true;
-        securityType = "auto";
         openFirewall = true;
-        extraConfig = ''
-            workgroup = WORKGROUP
-            allow insecure wide links = yes
-            map to guest = bad user
-            guest account = guest
-            follow symlinks = yes
-            wide links = yes
-            unix extensions = no
-          '';
-        shares = {
-          public = {
-              path = "/mnt/shares/jellyfin";
-              browseable = "yes";
-              "read only" = "no";
-              "guest ok" = "yes";
-          };
+        settings.global = {
+          securtiy = "auto";
+          "unix extensions" = "no";
+        };
+
+        settings.public = {
+          browseable = "yes";
+          "guest ok" = "yes";
+          "guest account" = "guest";
+          path = "/mnt/shares/jellyfin";
+          "read only" = "no";
+          "follow symlinks" = "yes";
+          "wide links" = "yes";
+          "allow insecure wide links" = "yes";
+
+          #"map to guest" = "bad user";
         };
       };
 
