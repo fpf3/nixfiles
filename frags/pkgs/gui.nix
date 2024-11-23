@@ -1,9 +1,9 @@
 {pkgs}:
 with pkgs; [
-  #kicad
   element-desktop
   firefox
   gnome-tweaks
+  kicad
   libreoffice
   mumble
   networkmanagerapplet
