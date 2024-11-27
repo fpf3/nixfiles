@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }:
+let 
+  contport = (import ../util/portpattern.nix);
+in
 {
   containers.web = {
     autoStart = true;
@@ -6,41 +9,11 @@
     hostAddress = "10.10.32.10";
     localAddress = "10.10.32.11";
 
-    forwardPorts = [
-      # HTTP
-      {
-        containerPort = 80;
-        hostPort = 80;
-        protocol = "udp";
-      }
-      {
-        containerPort = 80;
-        hostPort = 80;
-        protocol = "tcp";
-      }
-      # HTTPS
-      {
-        containerPort = 443;
-        hostPort = 443;
-        protocol = "udp";
-      }
-      {
-        containerPort = 443;
-        hostPort = 443;
-        protocol = "tcp";
-      }
-      # SSH
-      {
-        containerPort = 2222;
-        hostPort = 2222;
-        protocol = "udp";
-      }
-      {
-        containerPort = 2222;
-        hostPort = 2222;
-        protocol = "tcp";
-      }
-    ];
+    forwardPorts =
+      (contport 80)    # HTTP
+    ++(contport 443)   # HTTPS
+    ++(contport 2222)  # SSH
+    ++(contport 1234); # ZNC
 
     config = { config, pkgs, ...}: {
       networking.firewall.enable = true;
@@ -114,12 +87,49 @@
         '';
       };
 
+      services.znc = {
+        enable = true;
+        mutable = false; # all declarative config
+        useLegacyConfig = false;
+        openFirewall = true;
+        config = {
+          LoadModule = [ "webadmin" ];
+          Listener."l" = {
+            Port = 1234;
+            IPv4 = true;
+            IPv6 = true;
+            SSL = false;
+          };
+          User.fred = {
+            Admin = true;
+            Nick = "fpf3";
+            AltNick = "fpf3_";
+            Ident = "fred";
+            LoadModule = [ "chansaver" "controlpanel" ];
+            Pass.password = {
+              Method  = "sha256";
+              Hash    = "c06c463bbeb5b83657fed0c272c3a001eb5ff63b03f1a79331873cb4365fa717";
+              Salt    = "T.3uatRUiaoK.zhhjtm7";
+            };
+
+            Network.lainchan = {
+              LoadModule = [ "simple_away" ];
+              Server = "irc.lainchan.org +6697";
+              Chan = {
+                "#lainchan" = {};
+              };
+            };
+          };
+        };
+      };
+
       environment.systemPackages = with pkgs; [
         git
         mercurial
+        znc
       ];
 
-      system.stateVersion = "24.05";
+      system.stateVersion = "23.11";
     };
   };
 }
