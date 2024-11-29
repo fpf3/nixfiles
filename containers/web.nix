@@ -120,7 +120,6 @@ in
       environment.systemPackages = with pkgs; [
         git
         mercurial
-        znc
       ];
 
       system.stateVersion = "23.11";
