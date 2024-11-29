@@ -87,38 +87,32 @@ in
         '';
       };
 
+      # ace7bf6c0d60518645b8beb85981fb5a66f5855c40594a107ba431c6220e65d0e5c6099ec136bcac90032ea1acdc6f0de749f35b5c2aa750c2f3843bbcc0a264
       services.znc = {
         enable = true;
-        mutable = false; # all declarative config
-        useLegacyConfig = false;
         openFirewall = true;
-        config = {
-          LoadModule = [ "webadmin" ];
-          Listener."l" = {
-            Port = 1234;
-            IPv4 = true;
-            IPv6 = true;
-            SSL = false;
-          };
-          User.fred = {
-            Admin = true;
-            Nick = "fpf3";
-            AltNick = "fpf3_";
-            Ident = "fred";
-            LoadModule = [ "chansaver" "controlpanel" ];
-            Pass.password = {
-              Method  = "sha256";
-              Hash    = "c06c463bbeb5b83657fed0c272c3a001eb5ff63b03f1a79331873cb4365fa717";
-              Salt    = "T.3uatRUiaoK.zhhjtm7";
-            };
 
-            Network.lainchan = {
-              LoadModule = [ "simple_away" ];
-              Server = "irc.lainchan.org +6697";
-              Chan = {
-                "#lainchan" = {};
-              };
-            };
+        confOptions = {
+          modules = [ "webadmin" "log" ];
+          userName = "fred";
+          userModules = [ "chansaver" "controlpanel" ];
+          nick = "fpf3";
+
+          port = 1234;
+          passBlock =''
+            &lt;Pass password&gt;
+              Method  = sha256
+              Hash    = c06c463bbeb5b83657fed0c272c3a001eb5ff63b03f1a79331873cb4365fa717
+              Salt    = T.3uatRUiaoK.zhhjtm7
+            &lt;/Pass&gt;
+          '';
+
+          networks.lainchan = {
+            server = "irc.lainchan.org";
+            port = 6697;
+            useSSL = true;
+            modules = [ "simple_away" ];
+            channels = [ "lainchan" ];
           };
         };
       };

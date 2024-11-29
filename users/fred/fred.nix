@@ -82,6 +82,7 @@ in
       ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/gui_utils.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/typesetting.nix { pkgs=pkgs; })
+      ++(import ../../frags/pkgs/chatter.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/gamer.nix { pkgs=pkgs; });
     };
     
