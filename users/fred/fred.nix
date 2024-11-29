@@ -75,6 +75,7 @@ in
 
       userPackages = 
         listIf(withGui) (import ../../frags/pkgs/gui.nix { pkgs=pkgs; })
+      ++listIf(withGui) (import ../../frags/pkgs/chatter.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/custom.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/general_dev.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/py_dev.nix { pkgs=pkgs; })
@@ -82,7 +83,6 @@ in
       ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/gui_utils.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/typesetting.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/chatter.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/gamer.nix { pkgs=pkgs; });
     };
     
