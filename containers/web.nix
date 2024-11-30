@@ -93,18 +93,18 @@ in
         openFirewall = true;
 
         confOptions = {
-          modules = [ "webadmin" "log" ];
+          modules = [ "webadmin" "log" "backlog" ];
           userName = "fred";
           userModules = [ "chansaver" "controlpanel" ];
           nick = "fpf3";
 
           port = 1234;
           passBlock =''
-            &lt;Pass password&gt;
+            <Pass password>
               Method  = sha256
               Hash    = c06c463bbeb5b83657fed0c272c3a001eb5ff63b03f1a79331873cb4365fa717
               Salt    = T.3uatRUiaoK.zhhjtm7
-            &lt;/Pass&gt;
+            </Pass>
           '';
 
           networks.lainchan = {
