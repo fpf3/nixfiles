@@ -87,10 +87,12 @@ in
         '';
       };
 
-      # dcf4acc25ffff7d449ed45f35a2409b3b527dd7f99f5caaccb30cf2e0dc90e61b38aa1fd9ce344425a72ddcee0f5450952f0cc8777b65330a9713e35b549ed00
+      # TLS fingerprint: dcf4acc25ffff7d449ed45f35a2409b3b527dd7f99f5caaccb30cf2e0dc90e61b38aa1fd9ce344425a72ddcee0f5450952f0cc8777b65330a9713e35b549ed00
       services.znc = {
         enable = true;
         openFirewall = true;
+
+        modulePackages = [ pkgs.zncModules.backlog ];
 
         confOptions = {
           modules = [ "webadmin" "log" "backlog" ];
@@ -111,7 +113,7 @@ in
             server = "irc.lainchan.org";
             port = 6697;
             useSSL = true;
-            modules = [ "simple_away" ];
+            modules = [ "simple_away" "SASL" ];
             channels = [ "lainchan" ];
           };
         };
