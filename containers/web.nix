@@ -87,7 +87,7 @@ in
         '';
       };
 
-      # ace7bf6c0d60518645b8beb85981fb5a66f5855c40594a107ba431c6220e65d0e5c6099ec136bcac90032ea1acdc6f0de749f35b5c2aa750c2f3843bbcc0a264
+      # dcf4acc25ffff7d449ed45f35a2409b3b527dd7f99f5caaccb30cf2e0dc90e61b38aa1fd9ce344425a72ddcee0f5450952f0cc8777b65330a9713e35b549ed00
       services.znc = {
         enable = true;
         openFirewall = true;
