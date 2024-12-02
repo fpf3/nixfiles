@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }:
+let 
+  contport = (import ../util/portpattern.nix);
+in
 {
   containers.web = {
     autoStart = true;
@@ -6,41 +9,11 @@
     hostAddress = "10.10.32.10";
     localAddress = "10.10.32.11";
 
-    forwardPorts = [
-      # HTTP
-      {
-        containerPort = 80;
-        hostPort = 80;
-        protocol = "udp";
-      }
-      {
-        containerPort = 80;
-        hostPort = 80;
-        protocol = "tcp";
-      }
-      # HTTPS
-      {
-        containerPort = 443;
-        hostPort = 443;
-        protocol = "udp";
-      }
-      {
-        containerPort = 443;
-        hostPort = 443;
-        protocol = "tcp";
-      }
-      # SSH
-      {
-        containerPort = 2222;
-        hostPort = 2222;
-        protocol = "udp";
-      }
-      {
-        containerPort = 2222;
-        hostPort = 2222;
-        protocol = "tcp";
-      }
-    ];
+    forwardPorts =
+      (contport 80)    # HTTP
+    ++(contport 443)   # HTTPS
+    ++(contport 2222)  # SSH
+    ++(contport 1234); # ZNC
 
     config = { config, pkgs, ...}: {
       networking.firewall.enable = true;
@@ -114,12 +87,44 @@
         '';
       };
 
+      # TLS fingerprint: dcf4acc25ffff7d449ed45f35a2409b3b527dd7f99f5caaccb30cf2e0dc90e61b38aa1fd9ce344425a72ddcee0f5450952f0cc8777b65330a9713e35b549ed00
+      services.znc = {
+        enable = true;
+        openFirewall = true;
+
+        modulePackages = [ pkgs.zncModules.backlog ];
+
+        confOptions = {
+          modules = [ "webadmin" "log" "backlog" ];
+          userName = "fred";
+          userModules = [ "chansaver" "controlpanel" ];
+          nick = "fpf3";
+
+          port = 1234;
+          passBlock =''
+            <Pass password>
+              Method  = sha256
+              Hash    = c06c463bbeb5b83657fed0c272c3a001eb5ff63b03f1a79331873cb4365fa717
+              Salt    = T.3uatRUiaoK.zhhjtm7
+            </Pass>
+          '';
+
+          networks.lainchan = {
+            server = "irc.lainchan.org";
+            port = 6697;
+            useSSL = true;
+            modules = [ "simple_away" "SASL" ];
+            channels = [ "lainchan" ];
+          };
+        };
+      };
+
       environment.systemPackages = with pkgs; [
         git
         mercurial
       ];
 
-      system.stateVersion = "24.05";
+      system.stateVersion = "23.11";
     };
   };
 }

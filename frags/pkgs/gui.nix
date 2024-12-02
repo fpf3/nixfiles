@@ -1,6 +1,5 @@
 {pkgs}:
 with pkgs; [
-  element-desktop
   firefox
   gnome-tweaks
   kicad
@@ -9,12 +8,10 @@ with pkgs; [
   networkmanagerapplet
   pavucontrol
   picom
-  prismlauncher
   pywal
   remmina
   synergy
   thunderbird
-  vesktop
   vlc
   yubioath-flutter
 ]

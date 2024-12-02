@@ -75,6 +75,7 @@ in
 
       userPackages = 
         listIf(withGui) (import ../../frags/pkgs/gui.nix { pkgs=pkgs; })
+      ++listIf(withGui) (import ../../frags/pkgs/chatter.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/custom.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/general_dev.nix { pkgs=pkgs; })
       ++(import ../../frags/pkgs/py_dev.nix { pkgs=pkgs; })

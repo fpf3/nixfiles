@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }:
+let 
+  contport = (import ../util/portpattern.nix);
+in
 {
   containers.jellyfin = {
     autoStart = true;
@@ -6,61 +9,18 @@
     hostAddress = "10.10.31.10";
     localAddress = "10.10.31.11";
 
-    forwardPorts = [
-    ## Jellyfin ports...
-        {
-          containerPort = 8096;
-          hostPort = 8096;
-          protocol = "tcp";
-        }
-        {
-          containerPort = 8920;
-          hostPort = 8920;
-          protocol = "tcp";
-        }
-        {
-          containerPort = 1900;
-          hostPort = 1900;
-          protocol = "udp";
-        }
-        {
-          containerPort = 7359;
-          hostPort = 7359;
-          protocol = "udp";
-        }
-    ## SMB ports...
-        {
-          containerPort = 139;
-          hostPort = 139;
-          protocol = "tcp";
-        }
-        {
-          containerPort = 445;
-          hostPort = 445;
-          protocol = "tcp";
-        }
-        {
-          containerPort = 137;
-          hostPort = 137;
-          protocol = "udp";
-        }
-        {
-          containerPort = 138;
-          hostPort = 138;
-          protocol = "udp";
-        }
-    ## SMB-WSDD ports...
-        {
-          containerPort = 3702;
-          hostPort = 3702;
-          protocol = "udp";
-        }
-        {
-          containerPort = 5357;
-          hostPort = 5357;
-          protocol = "udp";
-        }
-    ];
+    forwardPorts = 
+      (contport 8096) # Jellyfin
+    ++(contport 8920)
+    ++(contport 1900)
+    ++(contport 7359)
+    ++(contport 139) # SMB
+    ++(contport 445)
+    ++(contport 137)
+    ++(contport 138)
+    ++(contport 3702) # SMB-WSDD
+    ++(contport 5357);
+
 
     config = { config, pkgs, ...}: {
       users.users.manager = {

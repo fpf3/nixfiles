@@ -1,4 +1,7 @@
 {config, pkgs, ...}: 
+let 
+  contport = (import ../util/portpattern.nix);
+in
 {
   containers.minecraft = {
     autoStart = true;
@@ -6,18 +9,7 @@
     hostAddress = "10.10.30.10";
     localAddress = "10.10.30.11";
 
-    forwardPorts = [
-    {
-      containerPort = 25565;
-      hostPort = 25565;
-      protocol = "tcp";
-    }
-    {
-      containerPort = 25565;
-      hostPort = 25565;
-      protocol = "udp";
-    }
-    ];
+    forwardPorts = (contport 25565);
 
     config = { config, pkgs, ...}: {
       users.users.minecraft = {
