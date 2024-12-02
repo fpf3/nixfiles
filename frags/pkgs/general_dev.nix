@@ -1,5 +1,6 @@
 {pkgs} :
 with pkgs; [
+  gcc
   clang-tools
   gnumake
   man-pages
