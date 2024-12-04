@@ -62,6 +62,12 @@ in
           forceSSL = true;
           enableACME = true;
         };
+        
+        virtualHosts."invidious.fpf3.net" = {
+          locations."/".proxyPass = "http://10.10.31.10:3000"; 
+          forceSSL = true;
+          enableACME = true;
+        };
       };
 
       security.acme = {
