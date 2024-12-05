@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let 
   contport = (import ../util/portpattern.nix);
+  serverDomain = "dwn-rnd-id15.ogp.qvii.com";
 in
 {
   containers.gitserver = {
@@ -17,9 +18,11 @@ in
     ++(contport 2222); # SSH
 
     config = { config, pkgs, ...}: {
-      networking.firewall.enable = true;
-      networking.firewall.allowedTCPPorts = [ 80 443 2222 8080 ];
-      networking.firewall.allowPing = true;
+      networking.firewall.enable = false;
+      networking.defaultGateway = {
+        address = "10.10.32.10";
+        interface = "eth0";
+      };
 
       users.users.manager = {
         isNormalUser = true;
@@ -44,24 +47,24 @@ in
 
       services.nginx = {
         enable = true;
-        user = "git";
 
         recommendedProxySettings = true;
 
-        virtualHosts."172.27.168.196" = {
+        virtualHosts.${serverDomain} = {
           forceSSL = false;
           enableACME = false;
-          locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+          #locations."/".proxyPass = "http://unix:/run/gitlab/gitlab-workhorse.socket";
+          locations."/".proxyPass = "http://localhost:3001/";
         };
 
         gitweb = {
           enable = true;
-          virtualHost = "172.27.168.196";
-          user = "git";
+          virtualHost = serverDomain;
         };
       };
 
-      services.gitweb.projectroot = "/home/git";
+      users.users.nginx.extraGroups = [ "gitea" ];
+      services.gitweb.projectroot = "/var/lib/gitea/repositories/";
 
       services.openssh = {
         ports = [ 22 2222 ];
@@ -81,7 +84,7 @@ in
       };
 
       services.gitlab = {
-        enable = true;
+        enable = false;
         databasePasswordFile = "/var/gitlab/dbPassword";
         initialRootPasswordFile = "/var/gitlab/rootPassword";
         initialRootEmail = "admin@local.host";
@@ -98,15 +101,28 @@ in
             servers.main = {
               label = "qvildap";
               host = "swn-ad01.qvii.net";
-              port = 389;
-              uid = "uid";
-              encryption = "plain";
-              base = "dc=qvii,dc=com";
+              port = 636;
+              uid = "sAMAccountName";
+              encryption = "simple_tls";
+              #tls_options = {
+              #  ca_file = "/var/gitlab/ldap.pem";
+              #};
+              base = "dc=qvii,dc=net";
               user_filter = "";
-              group_base = "ou=SW_Repo_Access,dc=qvii,dc=com";
+              group_base = "ou=SW_Repo_Access,dc=swn-ad01,dc=qvii,dc=net";
               allow_username_or_email_login = true;
             };
           };
+        };
+      };
+
+      services.gitea = {
+        enable = true;
+        appName = "QVI Gitea";
+        settings.server = {
+          DOMAIN = serverDomain;
+          ROOT_URL = "http://${config.services.gitea.settings.server.DOMAIN}/";
+          HTTP_PORT = 3001;
         };
       };
       
