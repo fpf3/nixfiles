@@ -41,7 +41,7 @@
   networking.nat = {
     enable = true;
     internalInterfaces = ["ve-+"];
-    externalInterface = "enp4s0";
+    externalInterface = "eth0";
   };
 
   # Enable the OpenSSH daemon.
