@@ -2,6 +2,7 @@
 with pkgs; [
   acpi
   bc
+  expect
   fd
   file
   htop
