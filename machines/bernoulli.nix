@@ -13,16 +13,7 @@
   ];
 
   # bootloader config
-  boot.loader.grub = {
-		enable = true;
-		zfsSupport = true;
-		efiSupport = true;
-		efiInstallAsRemovable = true;
-		#device = "/dev/disk/by-uuid/CC25-5235"; # XXX Why don't this work??
-		mirroredBoots = [
-			{ devices = [ "nodev" ]; path = "/boot"; }
-		];
-	};
+  boot.loader.grub.zfsSupport = true;
   
   # Kernel configuration
   # No kernel packages selected -> LTS Kernel

@@ -1,29 +1,27 @@
 { config, lib, pkgs, ... }:
 {
   imports =
-  [
+    [
+      ../containers/web.nix
     # fragments
     ../frags/autosuspend/autosuspend.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
   # bootloader config
-  boot.loader.grub = {
-		enable = true;
-		zfsSupport = true;
-		efiSupport = true;
-		efiInstallAsRemovable = true;
-		mirroredBoots = [
-			{ devices = [ "nodev" ]; path = "/boot"; }
-		];
-	};
+  boot.loader.grub.zfsSupport = true;
   
   swapDevices = [ ];
 
   # Kernel configuration
   # No kernel packages selected -> LTS Kernel
-  boot.kernelParams = [ "nohibernate" ]; # ZFS does not support swapfiles. Ensure we don't try to hibernate.
-  #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ]; # Set max ARC size to 16GB
+  boot.kernelParams = [ 
+    "nohibernate"  # ZFS does not support swapfiles. Ensure we don't try to hibernate.
+    "zfs.zfs_arc_max=17179869184"  # Set max ARC to 16 GiB
+    "nvidia_drm.fbdev=0" # Explicitly disable fbdev
+    "kvm.enable_virt_at_load=0" # keeps KVM available
+  ];
+  #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ];
   boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
 
   services.blueman.enable = true;
@@ -40,13 +38,12 @@
             finegrained = false; # Turn off GPU when not in use. "Turing" or newer. Can't use this, because we don't have integrated graphix
         };
         
-        open = true; # Open-source module (not nouveau, the upstream NVIDIA one...)
+        open = false; # Open-source module (not nouveau, the upstream NVIDIA one...)
 
         nvidiaSettings = true; # nvidia-settings manager
         
         package = config.boot.kernelPackages.nvidiaPackages.stable; # One of stable, beta, production or vulkan_stable
     };
-    pulseaudio.enable = false;
   };
 
   networking.hostName = "newton";

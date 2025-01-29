@@ -8,18 +8,9 @@
   ];
 
   # bootloader config
-  boot.loader.grub = {
-		enable = true;
-		zfsSupport = true;
-		efiSupport = true;
-		efiInstallAsRemovable = true;
-		mirroredBoots = [
-			{ devices = [ "nodev" ]; path = "/boot"; }
-		];
-	};
-
-  swapDevices = [ ];
+  boot.loader.grub.zfsSupport = true;
   
+  swapDevices = [ ];
 
   # Kernel configuration
   # No kernel packages selected -> LTS Kernel

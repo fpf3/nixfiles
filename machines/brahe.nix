@@ -18,16 +18,6 @@
       "steam-run"
     ];
 
-  # bootloader config
-  boot.loader.grub = {
-	enable = true;
-	efiSupport = true;
-	efiInstallAsRemovable = true;
-	mirroredBoots = [
-		{ devices = [ "nodev" ]; path = "/boot"; }
-	];
-  };
-
   # Kernel configuration
   boot.kernelPackages = pkgs.linuxPackages; # default
 
@@ -49,7 +39,6 @@
         
         package = config.boot.kernelPackages.nvidiaPackages.stable; # One of stable, beta, production or vulkan_stable
     };
-    pulseaudio.enable = false;
   };
 
   networking.hostName = "brahe";

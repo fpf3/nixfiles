@@ -18,6 +18,7 @@
 	mirroredBoots = [
 		{ devices = [ "nodev" ]; path = "/boot"; }
 	];
+    configurationLimit = 5;
   };
 
   swapDevices = [ ];
@@ -26,9 +27,6 @@
   boot.kernelPackages = pkgs.linuxPackages; # default
 
   # peripherals configuration
-  hardware = {
-    pulseaudio.enable = false;
-  };
 
   networking.hostName = "multivac";
   

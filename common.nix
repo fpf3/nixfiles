@@ -22,6 +22,18 @@
       "steam-unwrapped"
     ];
 
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    mirroredBoots = [
+        { devices = [ "nodev" ]; path = "/boot"; }
+    ];
+    configurationLimit = 5;
+  };
+  
+  services.pulseaudio.enable = false;
+
   # List packages installed in system profile.
    environment.systemPackages = with pkgs; [
      wget
