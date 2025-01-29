@@ -2,6 +2,7 @@
 {
 
   imports = [
+      ../containers/git.nix
       # include NixOS-WSL modules
       <nixos-wsl/modules>
       # User-specific config
@@ -28,13 +29,19 @@
   system.autoUpgrade.enable = true;
   
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 8000 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 8000 ];
 
   # big annoyance... .vhd files can't be shrunk easily
   # make sure the store doesn't get too big, we might not be able to deflate.
   nix.optimise = {
     automatic = true;
     dates = [ "19:00" ];
+  };
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = ["ve-+"];
+    externalInterface = "eth0";
   };
 
   # Enable the OpenSSH daemon.
