@@ -32,8 +32,6 @@
     configurationLimit = 5;
   };
   
-  services.pulseaudio.enable = false;
-
   # List packages installed in system profile.
    environment.systemPackages = with pkgs; [
      wget
