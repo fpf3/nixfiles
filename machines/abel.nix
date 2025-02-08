@@ -2,7 +2,6 @@
 {
   imports = 
   [
-    #../containers/web.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
@@ -17,6 +16,7 @@
   boot.kernelParams = [ 
     "nohibernate" # ZFS does not support swapfiles. 
     "zfs.zfs_arc_max=17179869184" # Set max ARC size to 16GB
+    "kvm.enable_virt_at_load=0" # keeps KVM available
   ]; 
   boot.initrd.kernelModules = [ "amdgpu" "msr" ];
   #boot.initrd.kernelModules = [ "amdgpu" "g_ether" "libcomposite" ];
