@@ -92,9 +92,6 @@
     pulse.enable = true;
   };
   
-  # enable auto-upgrade on reboot
-  system.autoUpgrade.enable = true;
-  
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 8000 24800 ];
   

@@ -20,5 +20,5 @@ stdenv.mkDerivation rec {
     sed -i "s@/usr/local@$out@" config.mk
   '';
 
-  makeFlags = [ "CC=${stdenv.cc.targetPrefix}cc" ];
+  makeFlags = [ "CC=${stdenv.cc.targetPrefix}cc" "GITREV=${src.rev}" ];
 }

@@ -48,6 +48,14 @@
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
+  nix.optimise = {
+    automatic = true;
+    dates = [ "3:00" ];
+  };
+  
+  # enable auto-upgrade on reboot
+  system.autoUpgrade.enable = true;
+
   # enable avahi
   services.avahi = {
     enable = true;
