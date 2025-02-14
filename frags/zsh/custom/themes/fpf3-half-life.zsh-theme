@@ -66,7 +66,7 @@ function steeef_precmd {
   (( PR_GIT_UPDATE )) || return
 
   # check for untracked files or updated submodules, since vcs_info doesn't
-  if [[ -n "$(git ls-files --other --exclude-standard 2>/dev/null)" ]]; then
+  if [[ -n "$(git ls-files --exclude-standard 2>/dev/null)" ]]; then
     PR_GIT_UPDATE=1
     FMT_BRANCH="${PM_RST} on ${turquoise}%b%u%c${hotpink} ●${PR_RST}"
   else
