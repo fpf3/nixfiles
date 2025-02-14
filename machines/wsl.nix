@@ -2,12 +2,33 @@
 {
 
   imports = [
-      ../containers/git.nix
+      #../containers/git.nix
       # include NixOS-WSL modules
       <nixos-wsl/modules>
       # User-specific config
       (import ../users/ffrey/ffrey.nix {pkgs=pkgs; config=config; lib=lib;})
     ];
+
+  # ZFS wants this set. Why? XXX
+  networking.hostId = "b2c73136"; # just a random number...
+
+  # Set your time zone.
+  time.timeZone = "America/New_York";
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # List packages installed in system profile.
+  environment.systemPackages = with pkgs; [
+    wget
+    xorg.xhost
+  ];
+
+  # fonts
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-color-emoji
+    #joypixels # figure out how to accept license declaratively
+  ];
 
   swapDevices = [ ];
 
@@ -55,6 +76,28 @@
     };
   };
 
+  # Configure keymap in X11
+  services.xserver.xkb.layout = "us";
+
+  # enable avahi
+  services.avahi = {
+    enable = true;
+    
+    ipv4 = true;
+    nssmdns4 = true;
+
+    ipv6 = false;
+    nssmdns6 = false;
+
+    publish = {
+      enable = true;
+      domain = true;
+      addresses = true;
+    };
+
+    openFirewall = true;
+    domainName = "local";
+  };
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
