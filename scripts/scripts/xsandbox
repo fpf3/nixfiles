@@ -1,4 +1,4 @@
 #!/bin/sh
 
-Xephyr -br -ac -noreset -screen 1200x720 :99 & 
+Xephyr -br -ac -noreset -screen 1040x624 :99 & 
 DISPLAY=:99 $1
