@@ -28,8 +28,8 @@ nmap <C-s> :w<Return>
 nmap <C-S-e> <Esc>:NERDTreeToggle<CR>
 nmap <C-S-t> <Esc>:NERDTreeFocus<CR>
 
-nmap <C-j> LjM
-nmap <C-k> HkM
+nmap <C-j> jzz
+nmap <C-k> kzz
 
 nmap o :e 
 nmap O :tabnew 
