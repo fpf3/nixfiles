@@ -6,5 +6,6 @@ with pkgs; [
   rofimoji
   scrot
   xclip
+  keepassxc
   zathura
 ]

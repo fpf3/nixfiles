@@ -20,6 +20,7 @@
       "steam-original"
       "steam-run"
       "steam-unwrapped"
+      "teamviewer"
     ];
 
   boot.loader.grub = {
