@@ -2,6 +2,7 @@
 with pkgs; [
   calibre
   firefox
+  floorp
   gnome-tweaks
   kicad
   libreoffice
