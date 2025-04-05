@@ -12,7 +12,6 @@ with pkgs; [
   ncdu
   openfortivpn
   pciutils
-  ranger
   ripgrep
   screen
   sshfs

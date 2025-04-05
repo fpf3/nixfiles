@@ -2,7 +2,7 @@
 with pkgs; [
   (
     python3.withPackages (
-      ps: with ps; with python3Packages; [
+      ps: with ps; [
         hglib
         ipympl
         ipython
