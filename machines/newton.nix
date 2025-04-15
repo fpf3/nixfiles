@@ -71,7 +71,8 @@
       primary = true;
       position = "0x240";
       mode = "2560x1440";
-      rate = "155.00";
+      #rate = "155.00";
+      rate = "143.91";
     };
 
     config."HDMI-0" = {
