@@ -12,7 +12,7 @@ in
     theme = "fpf3-half-life";
   };
   autocd = true;
-  initExtra = ''
+  initContent = ''
     #NIX_AUTO_RUN = "1"
     PATH=$PATH:/home/fred/bin
   '';

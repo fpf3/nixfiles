@@ -1,5 +1,8 @@
 # Common settings between all machines
 {config, lib, pkgs, ...}:
+let
+  grub_bg = builtins.path { path=./frags/grub/zentree_1.png; };
+in
 {
   # ZFS wants this set. Why? XXX
   networking.hostId = "b2c73136"; # just a random number...
@@ -31,6 +34,9 @@
         { devices = [ "nodev" ]; path = "/boot"; }
     ];
     configurationLimit = 5;
+    splashImage = grub_bg;
+    font = "${pkgs.nerd-fonts._0xproto}/share/fonts/truetype/NerdFonts/0xProto/0xProtoNerdFontMono-Regular.ttf";
+    fontSize = 32;
   };
   
   # List packages installed in system profile.
