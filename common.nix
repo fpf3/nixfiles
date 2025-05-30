@@ -26,6 +26,8 @@ in
       "teamviewer"
     ];
 
+  networking.resolvconf.enable = true;
+
   boot.loader.grub = {
     enable = true;
     efiSupport = true;

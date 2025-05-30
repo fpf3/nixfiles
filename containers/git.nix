@@ -7,8 +7,8 @@ in
   containers.gitserver = {
     autoStart = true;
     privateNetwork = true;
-    hostAddress = "10.10.32.10";
-    localAddress = "10.10.32.11";
+    hostAddress = "10.10.33.10";
+    localAddress = "10.10.33.11";
 
     timeoutStartSec = "5min"; # gitlab takes a LOOOONG time
 
