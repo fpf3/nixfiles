@@ -72,11 +72,11 @@
 
     config."HDMI-0" = {
       enable = true;
-      primary = false;
+      primary = true;
       scale = { x = 0.7; y = 0.7; };
       position = "0x0";
       mode = "3840x2160";
-      rate = "60.00";
+      rate = "59.94";
       dpi = 68;
     };
   };
