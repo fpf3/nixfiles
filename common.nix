@@ -12,19 +12,8 @@ in
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # list of unfree $oftware to allow
-  nixpkgs.config.allowUnfreePredicate = pkg:
-  builtins.elem (lib.getName pkg) [
-      "joypixels"
-      "nvidia-persistenced"
-      "nvidia-settings"
-      "nvidia-x11"
-      "steam"
-      "steam-original"
-      "steam-run"
-      "steam-unwrapped"
-      "teamviewer"
-    ];
+  # allow unfree $oftware
+  nixpkgs.config.allowUnfree = true;
 
   boot.loader.grub = {
     enable = true;
