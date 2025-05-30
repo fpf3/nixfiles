@@ -39,15 +39,14 @@
   networking.hostName = "brahe";
   
   networking.networkmanager.enable = true;
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # GNOME
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.cinnamon.enable = true;
 
   # dwm
   services.xserver.windowManager.dwm.enable = true;
@@ -68,11 +67,11 @@
     config."HDMI-0" = {
       enable = true;
       primary = true;
-      scale = { x = 0.7; y = 0.7; };
+      #scale = { x = 0.7; y = 0.7; };
       position = "0x0";
       mode = "3840x2160";
       rate = "59.94";
-      dpi = 68;
+      dpi = 97;
     };
   };
   

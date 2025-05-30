@@ -49,10 +49,12 @@ in
   nix.optimise = {
     automatic = true;
     dates = [ "3:00" ];
+    persistent = true;
   };
   
   # enable auto-upgrade on reboot
   system.autoUpgrade.enable = true;
+  system.autoUpgrade.persistent = true;
 
   # enable avahi
   services.avahi = {
