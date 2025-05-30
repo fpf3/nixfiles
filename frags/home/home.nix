@@ -52,7 +52,7 @@
 
   xresources.properties = {
     "st.alpha" = "1.0";
-    "dwm.borderpx" = "3";
+    "dwm.borderpx" = "2";
   };
 
   programs.bash.sessionVariables = lib.mkIf(envVars != {}) envVars;
