@@ -8,10 +8,10 @@ in
     imports = 
     [
       <home-manager/nixos>
-      (import ../../frags/gamer/gamer.nix {pkgs=pkgs; lib=lib; config=config; withGui=withGui;})
+      (import ../../frags/gamer/gamer.nix { inherit pkgs lib config withGui; })
     ];
     
-    users.users.fred = (import ./user.nix) { pkgs=pkgs; };
+    users.users.fred = (import ./user.nix) { inherit pkgs; };
     
     programs.zsh.enable = true; # Enable ZSH system-wide
 
@@ -74,18 +74,17 @@ in
       # installed packages
 
       userPackages = 
-        listIf(withGui) (import ../../frags/pkgs/gui.nix { pkgs=pkgs; })
-      ++listIf(withGui) (import ../../frags/pkgs/chatter.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/custom.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/general_dev.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/py_dev.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/scripts.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/utils.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/gui_utils.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/typesetting.nix { pkgs=pkgs; })
-      ++(import ../../frags/pkgs/gamer.nix { pkgs=pkgs; });
+      listIf(withGui) (
+           (import ../../frags/pkgs/gui.nix { inherit pkgs; })
+        ++ (import ../../frags/pkgs/chatter.nix { inherit pkgs; })
+        ++ (import ../../frags/pkgs/gamer.nix { inherit pkgs; })
+        ++ (import ../../frags/pkgs/typesetting.nix { inherit pkgs; })
+        ++ (import ../../frags/pkgs/custom.nix { inherit pkgs; })
+        ++ (import ../../frags/pkgs/gui_utils.nix { inherit pkgs; })
+      )
+      ++ (import ../../frags/pkgs/general_dev.nix { inherit pkgs; })
+      ++ (import ../../frags/pkgs/py_dev.nix { inherit pkgs; })
+      ++ (import ../../frags/pkgs/scripts.nix { inherit pkgs; })
+      ++ (import ../../frags/pkgs/utils.nix { inherit pkgs; });
     };
-    
-
-    # installed packages
 }
