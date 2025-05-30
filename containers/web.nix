@@ -13,6 +13,7 @@ in
     privateNetwork = true;
     hostAddress = "10.10.32.10";
     localAddress = "10.10.32.11";
+    timeoutStartSec = "10min"; # acme renewal can take a bit
     
     forwardPorts =
       (contport 80)    # HTTP
