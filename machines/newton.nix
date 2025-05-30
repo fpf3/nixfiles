@@ -21,8 +21,10 @@
     "nvidia_drm.fbdev=0" # Explicitly disable fbdev
     "kvm.enable_virt_at_load=0" # keeps KVM available
   ];
-  #boot.kernelParams = [ "zfs.zfs_arc_max=17179869184" ];
   boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
+
+  # enable cuda in nixpkgs
+  nixpkgs.config.cudaSupport = true;
 
   services.blueman.enable = true;
 

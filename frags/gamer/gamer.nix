@@ -1,4 +1,7 @@
 {pkgs, lib, config, withGui ? true}:
+let 
+  listIf = (cond: l: if cond then l else []);
+in
 {
   # steam system config
   programs.steam = lib.mkIf(withGui) {
@@ -8,5 +11,5 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-  services.udev.packages = [ pkgs.dolphin-emu ];
+  services.udev.packages = listIf(withGui) [ pkgs.dolphin-emu ];
 }

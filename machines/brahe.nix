@@ -8,15 +8,10 @@
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
     (import ../users/theater/theater.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
-  nixpkgs.config.allowUnfreePredicate = pkg:
-  builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-      "steam"
-      "steam-original"
-      "steam-run"
-    ];
+
+  boot.kernelParams = [
+    "nvidia_drm.fbdev=0" # Explicitly disable fbdev
+  ];
 
   # Kernel configuration
   boot.kernelPackages = pkgs.linuxPackages; # default
@@ -30,7 +25,7 @@
 
         powerManagement = {
             enable = true; # Enable this if you have graphical corruption issues waking up from sleep
-            finegrained = false; # Turn off GPU when not in use. "Turing" or newer. Can't use this, because we don't have integrated graphix
+            finegrained = false; # Turn off GPU when not in use. "Turing" or newer.
         };
         
         open = false; # Open-source module (not nouveau, the upstream NVIDIA one...)
@@ -72,11 +67,11 @@
 
     config."HDMI-0" = {
       enable = true;
-      primary = false;
+      primary = true;
       scale = { x = 0.7; y = 0.7; };
       position = "0x0";
       mode = "3840x2160";
-      rate = "60.00";
+      rate = "59.94";
       dpi = 68;
     };
   };

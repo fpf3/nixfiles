@@ -9,4 +9,6 @@
   snip = pkgs.writeShellScriptBin "snip" (lib.readFile ./scripts/snip);
   
   xsandbox = pkgs.writeShellScriptBin "xsandbox" (lib.readFile ./scripts/xsandbox);
+  
+  dmenu_spawn = pkgs.writeShellScriptBin "dmenu_spawn" (lib.readFile ./scripts/dmenu_spawn.sh);
 }
