@@ -9,6 +9,9 @@
       (import ../users/ffrey/ffrey.nix {pkgs=pkgs; config=config; lib=lib;})
     ];
 
+  # allow armv7l binfmt qemu
+  boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
+
   # ZFS wants this set. Why? XXX
   networking.hostId = "b2c73136"; # just a random number...
 
