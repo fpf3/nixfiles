@@ -6,10 +6,6 @@ in
   services.xserver.displayManager.lightdm = {
     enable = true;
     background = dm_bg;
-    greeters.lomiri.enable = true;
-    #extraConfig = ''
-    #  auth    sufficient   pam_fprintd.so
-    #'';
+    greeters.enso.enable = true;
   };
-  services.displayManager.defaultSession = "none+dwm";
 }

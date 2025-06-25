@@ -58,7 +58,11 @@
   services.teamviewer.enable = true;
 
   #services.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.lightdm.greeters.enso.extraConfig = ''
+    active-monitor=1
+    '';
   services.xserver.windowManager.dwm.enable = true;
+  services.displayManager.defaultSession = "none+dwm";
 
   # Set X11 monitor R&R
 

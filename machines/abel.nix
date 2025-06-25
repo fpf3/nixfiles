@@ -41,6 +41,7 @@
 
   #services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.dwm.enable = true;
+  services.displayManager.defaultSession = "none+dwm";
 
   services.fprintd.enable = true;
   #services.fprintd.tod.enable = true;
