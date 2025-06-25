@@ -16,12 +16,12 @@ in
 // lib.optionalAttrs (old_init) {
 initExtra = lib.mkIf(old_init) ''
   #NIX_AUTO_RUN = "1"
-  PATH=$PATH:/home/fred/bin
+  PATH=$PATH:$HOME/bin
 '';
 }
 // lib.optionalAttrs(!old_init) {
   initContent = lib.mkIf(!old_init) ''
     #NIX_AUTO_RUN = "1"
-    PATH=$PATH:/home/fred/bin
+    PATH=$PATH:$HOME/bin
   '';
 }
