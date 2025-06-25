@@ -17,6 +17,8 @@ in
 
   networking.resolvconf.enable = true;
 
+  networking.networkmanager.enable = true;
+
   boot.loader.grub = {
     enable = true;
     efiSupport = true;

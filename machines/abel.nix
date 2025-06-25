@@ -39,12 +39,13 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  #services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.dwm.enable = true;
 
   services.fprintd.enable = true;
   #services.fprintd.tod.enable = true;
   #services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
-  security.pam.services.gdm-fingerprint.fprintAuth = true; # "/etc/pam.d/gdm-fingerprint" is  not created by default
+  #security.pam.services.gdm-fingerprint.fprintAuth = true; # "/etc/pam.d/gdm-fingerprint" is  not created by default
   security.pam.services.login.fprintAuth = false;
   security.pam.services.sudo.fprintAuth = false;
   security.pam.services.su.fprintAuth = false;
