@@ -2,6 +2,7 @@
 with pkgs; [
   dmenu
   feh
+  nautilus
   rofi
   rofimoji
   scrot
