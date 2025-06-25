@@ -27,18 +27,17 @@
 
   # peripherals configuration
   services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware = {
-    graphics.enable = true;
-    pulseaudio.enable = false;
-  };
+  
+  hardware.graphics.enable = true;
+  services.pulseaudio.enable = false;
 
   networking.hostName = "abel";
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.xserver.windowManager.dwm.enable = true;
 
   services.fprintd.enable = true;
@@ -70,7 +69,6 @@
       position = "0x0";
       mode = "2256x1504";
       rate = "60.00";
-      dpi = 97;
     };
   };
 
