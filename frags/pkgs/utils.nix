@@ -7,8 +7,10 @@ with pkgs; [
   file
   htop
   imagemagick
+  kmod
   lm_sensors
   lsb-release
+  lsof
   ncdu
   openfortivpn
   pciutils
@@ -18,6 +20,7 @@ with pkgs; [
   sysstat
   tmux
   tree
+  udisks
   unzip
   usbutils
   yubikey-manager

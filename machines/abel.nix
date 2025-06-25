@@ -2,6 +2,9 @@
 {
   imports = 
   [
+    # fragments
+    ../frags/lightdm/lightdm.nix
+
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
@@ -37,8 +40,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
   services.xserver.windowManager.dwm.enable = true;
 
   services.fprintd.enable = true;
