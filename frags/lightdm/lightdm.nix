@@ -6,6 +6,26 @@ in
   services.xserver.displayManager.lightdm = {
     enable = true;
     background = dm_bg;
-    greeters.enso.enable = true;
+    greeters.slick = {
+      enable = true;
+      extraConfig = ''
+        background=${dm_bg}
+        enable-hidpi=on
+      '';
+    };
+
+    #greeter.package = pkgs.callPackage /home/fred/dev/nixpkgs/pkgs/by-name/li/lightdm-slick-greeter/package.nix {};
   };
+  
+  environment.systemPackages = with pkgs; [
+    dconf
+    orca
+    gdk-pixbuf
+    gobject-introspection
+    wrapGAppsHook3
+    (python3.withPackages (ps: with ps; [
+      pygobject3
+    ]))
+    #python313Packages.pygobject-stubs
+  ];
 }
