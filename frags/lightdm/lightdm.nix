@@ -10,7 +10,7 @@ in
       enable = true;
       extraConfig = ''
         background=${dm_bg}
-        enable-hidpi=on
+        enable-hidpi=off
       '';
     };
 
@@ -26,6 +26,5 @@ in
     (python3.withPackages (ps: with ps; [
       pygobject3
     ]))
-    #python313Packages.pygobject-stubs
   ];
 }

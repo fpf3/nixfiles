@@ -63,6 +63,9 @@
     '';
   services.xserver.windowManager.dwm.enable = true;
   services.displayManager.defaultSession = "none+dwm";
+  services.xserver.displayManager.lightdm.greeters.slick.extraConfig = ''
+        only-on-monitor=DP-0
+      '';
 
   # Set X11 monitor R&R
 
