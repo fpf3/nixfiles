@@ -100,20 +100,12 @@
 
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
 
-  services.mpd = {
-    enable = true;
-    musicDirectory = "/home/fred/Music";
-    extraConfig = ''
-      audio_output {
-        type "pipewire"
-        name "My PipeWire Output"
-      }
-    '';
-  };
-  
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 8000 24800 ];
   
