@@ -52,6 +52,7 @@
 
   xresources.properties = {
     "st.alpha" = "1.0";
+    "st.font" = "mono:pixelsize=15:antialias=true:autohint=true";
     "dwm.borderpx" = "2";
   };
 

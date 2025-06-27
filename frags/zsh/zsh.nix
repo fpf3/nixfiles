@@ -23,5 +23,7 @@ initExtra = lib.mkIf(old_init) ''
   initContent = lib.mkIf(!old_init) ''
     #NIX_AUTO_RUN = "1"
     PATH=$PATH:$HOME/bin
+
+    [[ -z "$TMUX" ]] && exec tmux
   '';
 }

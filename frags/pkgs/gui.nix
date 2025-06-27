@@ -1,8 +1,8 @@
 {pkgs}:
 with pkgs; [
+  brave
   calibre
   firefox
-  floorp
   gnome-tweaks
   kicad
   libreoffice

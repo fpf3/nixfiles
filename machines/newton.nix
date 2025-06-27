@@ -57,7 +57,7 @@
 
   services.teamviewer.enable = true;
 
-  #services.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
   services.xserver.displayManager.lightdm.greeters.enso.extraConfig = ''
     active-monitor=1
     '';
@@ -101,6 +101,17 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+  };
+
+  services.mpd = {
+    enable = true;
+    musicDirectory = "/home/fred/Music";
+    extraConfig = ''
+      audio_output {
+        type "pipewire"
+        name "My PipeWire Output"
+      }
+    '';
   };
   
   # Open ports in the firewall.
