@@ -51,6 +51,29 @@
   security.pam.services.sudo.fprintAuth = false;
   security.pam.services.su.fprintAuth = false;
 
+  services.logind.lidSwitch = "ignore";
+
+  services.acpid = {
+    enable = true;
+    handlers = {
+      lidlock = {
+        event = "button/lid.*";
+        action = ''
+          #!/bin/bash
+
+          export XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+
+          grep -q close /proc/acpi/button/lid/*/state
+          if [ $? = 0 ]; then
+            # close action
+            ${pkgs.lightdm}/bin/dm-tool switch-to-greeter
+            systemctl suspend
+          fi
+        '';
+      };
+    };
+  };
+
 
   services.fwupd.enable = true;
 
