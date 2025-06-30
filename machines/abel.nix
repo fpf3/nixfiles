@@ -26,6 +26,7 @@
 
   boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
 
+  hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
   # peripherals configuration
