@@ -1,7 +1,10 @@
 { pkgs }:
 with pkgs; [
+  brightnessctl
   dmenu
   feh
+  nautilus
+  playerctl
   rofi
   rofimoji
   scrot

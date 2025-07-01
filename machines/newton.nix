@@ -2,9 +2,9 @@
 {
   imports =
     [
-      ../containers/web.nix
     # fragments
     ../frags/autosuspend/autosuspend.nix
+    ../frags/lightdm/lightdm.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
@@ -55,9 +55,17 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.teamviewer.enable = true;
+
+  services.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.lightdm.greeters.enso.extraConfig = ''
+    active-monitor=1
+    '';
   services.xserver.windowManager.dwm.enable = true;
+  services.displayManager.defaultSession = "none+dwm";
+  services.xserver.displayManager.lightdm.greeters.slick.extraConfig = ''
+        only-on-monitor=DP-0
+      '';
 
   # Set X11 monitor R&R
 
@@ -92,9 +100,12 @@
 
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
     pulse.enable = true;
+    jack.enable = true;
   };
-  
+
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 8000 24800 ];
   
