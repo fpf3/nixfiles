@@ -26,6 +26,7 @@
   environment.systemPackages = with pkgs; [
     wget
     xorg.xhost
+    kmod
   ];
 
   environment.sessionVariables = {
@@ -55,8 +56,9 @@
     defaultUser = "ffrey";
     usbip = {
       enable = true;
-      autoAttach = [ "3-3" ];
+      snippetIpAddress = "172.20.64.1";
     };
+
 
     useWindowsDriver = true;
   };
