@@ -1,6 +1,5 @@
 { pkgs }:
 with pkgs; [
-  brightnessctl
   dmenu
   feh
   nautilus
