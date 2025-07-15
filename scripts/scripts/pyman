@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <path to object>"
+    echo "Path is space delimited. ex:"
+    echo "    $0 numpy matmul"
+    echo "returns the help page for \`np.matmul\`"
+    echo ""
+    echo "If the module is a submodule, make sure that the dot-delimited submodule is the first element of the path. ex:"
+    echo "    $0 matplotlib.pyplot plot"
+    exit -1
+fi
+
+TARGET=$(echo $@ | sed -e 's/\s\+/\n/g' | paste -sd '.')
+python -c "import $1; help($TARGET)"
