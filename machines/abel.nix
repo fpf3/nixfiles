@@ -67,7 +67,7 @@
           grep -q close /proc/acpi/button/lid/*/state
           if [ $? = 0 ]; then
             # close action
-            ${pkgs.lightdm}/bin/dm-tool switch-to-greeter
+            ${pkgs.lightdm}/bin/dm-tool switch-to-greeter &
             systemctl suspend
           fi
         '';
@@ -133,6 +133,8 @@
       PermitRootLogin = "no";
     };
   };
+
+  services.mullvad-vpn.enable = true;
 
   
   # This option defines the first version of NixOS you have installed on this particular machine,
