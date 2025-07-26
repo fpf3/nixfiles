@@ -11,6 +11,7 @@ with pkgs; [
   lm_sensors
   lsb-release
   lsof
+  mullvad
   ncdu
   openfortivpn
   pciutils
