@@ -2,8 +2,6 @@
 with pkgs; [
   brave
   calibre
-  gnome-tweaks
-  kicad
   libreoffice
   mumble
   networkmanagerapplet

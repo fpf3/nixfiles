@@ -97,6 +97,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.brlaser ];
 
   services.pipewire = {
     enable = true;
@@ -117,6 +118,11 @@
       PermitRootLogin = "no";
     };
   };
+
+  # machine-specific user packages
+  home-manager.users.fred.home.packages = with pkgs; [
+    kicad
+  ];
 
   
   # This option defines the first version of NixOS you have installed on this particular machine,
