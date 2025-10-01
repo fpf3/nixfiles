@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, libX11, libXinerama, libXft, writeText, patches ? [ ], conf ? null
+{ lib, stdenv, fetchurl, libX11, libXinerama, libXft, libxcb, writeText, patches ? [ ], conf ? null
 # update script dependencies
 , gitUpdater
 }:
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     ref = "master";
   };
   
-  buildInputs = [ (builtins.path { path = src.outPath; }) libX11 libXinerama libXft ];
+  buildInputs = [ libX11 libXinerama libXft libxcb ];
 
   prePatch = ''
     sed -i "s@/usr/local@$out@" config.mk
