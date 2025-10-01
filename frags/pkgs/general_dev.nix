@@ -1,5 +1,6 @@
 {pkgs} :
 with pkgs; [
+  bear
   gcc
   gf
   clang-tools
