@@ -10,7 +10,13 @@
   ];
   # bootloader config
   boot.loader.grub.zfsSupport = true;
-  
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      jdk8 = final.openjdk8-bootstrap;
+    })
+  ];
+
   swapDevices = [ ];
 
   # Kernel configuration
@@ -19,6 +25,7 @@
     "nohibernate"  # ZFS does not support swapfiles. Ensure we don't try to hibernate.
     "zfs.zfs_arc_max=17179869184"  # Set max ARC to 16 GiB
     "nvidia_drm.fbdev=0" # Explicitly disable fbdev
+    #"nvidia.TemporaryFilePath=/run" # dump contents of VRAM to DRAM
     "kvm.enable_virt_at_load=0" # keeps KVM available
   ];
   boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
@@ -118,6 +125,8 @@
       PermitRootLogin = "no";
     };
   };
+
+  services.mullvad-vpn.enable = true;
 
   # machine-specific user packages
   home-manager.users.fred.home.packages = with pkgs; [
