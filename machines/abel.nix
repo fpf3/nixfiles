@@ -26,6 +26,8 @@
 
   boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
 
+  virtualisation.waydroid.enable = true;
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
