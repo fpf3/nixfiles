@@ -45,9 +45,11 @@
     fzf = {
       enable = true;
       enableZshIntegration = true;
+      enableBashIntegration = true;
       tmux.enableShellIntegration = true;
     };
 
+    bash.enable = true;
 
     zsh = (import ../zsh/zsh.nix) { lib=lib; envVars = envVars; };
 
