@@ -42,6 +42,12 @@
       settings.preview_images = true;
     };
 
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      tmux.enableShellIntegration = true;
+    };
+
 
     zsh = (import ../zsh/zsh.nix) { lib=lib; envVars = envVars; };
 

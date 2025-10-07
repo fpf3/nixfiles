@@ -49,6 +49,8 @@
     #joypixels # figure out how to accept license declaratively
   ];
 
+  virtualisation.waydroid.enable = true;
+
   swapDevices = [ ];
 
   wsl = {

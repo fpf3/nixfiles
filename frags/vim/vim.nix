@@ -17,6 +17,7 @@ in
             coc-rust-analyzer
             coc-clangd
             coc-pyright
+            live-command-nvim
         ];
         extraConfig = builtins.replaceStrings
           ["COC_KEYBINDS_PATH"]
