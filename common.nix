@@ -19,6 +19,8 @@ in
 
   networking.networkmanager.enable = true;
 
+  #nixpkgs.overlays = (import ./frags/pkgs/overlays.nix) { pkgs=pkgs; lib=lib; };
+
   boot.loader.grub = {
     enable = true;
     efiSupport = true;

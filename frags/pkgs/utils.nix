@@ -4,6 +4,7 @@ with pkgs; [
   bc
   expect
   fd
+  ffmpeg
   file
   htop
   imagemagick
@@ -12,7 +13,7 @@ with pkgs; [
   lsb-release
   lsof
   mullvad
-  ncdu
+  gdu
   openfortivpn
   pciutils
   ripgrep

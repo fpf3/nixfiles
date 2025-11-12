@@ -16,9 +16,11 @@
   # configs
   programs = {
     git = lib.mkIf(fullName != "") {
-        enable = true;
-        userName = fullName;
-        userEmail = emailAddr;
+      enable = true;
+      settings.user = {
+        name = fullName;
+        email = emailAddr;
+      };
     };
 
     mercurial = lib.mkIf(fullName != "") {

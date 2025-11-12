@@ -34,7 +34,7 @@ in
 
     qt = lib.mkIf(withGui) {
       enable = true;
-      platformTheme = "gnome";
+      platformTheme = "kde";
       style = "adwaita-dark";
     };
 

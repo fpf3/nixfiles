@@ -1,7 +1,8 @@
 {pkgs}:
 with pkgs; [
   brave
-  calibre
+  #calibre
+  cmakeWithGui
   libreoffice
   mumble
   networkmanagerapplet
@@ -11,7 +12,7 @@ with pkgs; [
   remmina
   strawberry
   synergy
-  thunderbird
+  thunderbird-bin
   vlc
   yubioath-flutter
 ]
