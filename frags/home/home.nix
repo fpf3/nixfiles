@@ -10,6 +10,9 @@
   envVars ? {}, 
   ...
 }:
+let
+  flag_2505 = builtins.substring 0 5 (lib.version) <= "25.05";
+in
 {
   home.stateVersion = "24.05"; # Do I bump this, or keep it the same?
 
@@ -17,10 +20,16 @@
   programs = {
     git = lib.mkIf(fullName != "") {
       enable = true;
+    }
+    // lib.optionalAttrs(!flag_2505) {
       settings.user = {
         name = fullName;
         email = emailAddr;
       };
+    }
+    // lib.optionalAttrs(flag_2505) {
+      userName = fullName;
+      email = emailAddr;
     };
 
     mercurial = lib.mkIf(fullName != "") {
