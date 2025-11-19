@@ -49,6 +49,8 @@ in
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
+  services.orca.enable = false;
+
   nix.optimise = {
     automatic = true;
     dates = [ "3:00" ];
