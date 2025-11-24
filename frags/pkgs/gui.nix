@@ -10,8 +10,11 @@ with pkgs; [
   pywal
   remmina
   strawberry
-  synergy
+  #synergy
   thunderbird
+  kitty
+  waybar
+  wofi
   vlc
   yubioath-flutter
 ]

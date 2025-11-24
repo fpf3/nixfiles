@@ -28,6 +28,9 @@
 
   virtualisation.waydroid.enable = true;
 
+  hardware.framework.amd-7040.preventWakeOnAC = true;
+  services.power-profiles-daemon.enable = true;
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
