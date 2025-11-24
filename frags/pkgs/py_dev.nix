@@ -3,7 +3,7 @@ with pkgs; [
   (
     python3.withPackages (
       ps: with ps; [
-        hglib
+        python-hglib
         ipympl
         ipywidgets
         ipython

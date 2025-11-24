@@ -1,7 +1,8 @@
 {pkgs}:
 with pkgs; [
   brave
-  calibre
+  #calibre
+  cmakeWithGui
   libreoffice
   mumble
   networkmanagerapplet
@@ -10,8 +11,8 @@ with pkgs; [
   pywal
   remmina
   strawberry
-  #synergy
-  thunderbird
+  synergy
+  thunderbird-bin
   kitty
   waybar
   wofi

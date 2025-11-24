@@ -19,6 +19,8 @@ in
 
   networking.networkmanager.enable = true;
 
+  #nixpkgs.overlays = (import ./frags/pkgs/overlays.nix) { pkgs=pkgs; lib=lib; };
+
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
@@ -47,6 +49,12 @@ in
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
+  nix.gc = {
+    automatic = true;
+    dates = [ "3:00" ];
+    persistent = true;
+  };
+  
   nix.optimise = {
     automatic = true;
     dates = [ "3:00" ];
