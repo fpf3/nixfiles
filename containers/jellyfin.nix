@@ -20,7 +20,8 @@ in
     ++(contport 138)
     ++(contport 3702)   # SMB-WSDD
     ++(contport 5357)
-    ++(contport 3000);  # invidious
+    ++(contport 3000)   # invidious
+    ++(contport 8112);  # deluge
 
 
     config = { config, pkgs, ...}: {
@@ -73,6 +74,14 @@ in
         enable = true;
         openFirewall = true;
       };
+
+      services.deluge = {
+        enable = true;
+        openFirewall = true;
+        user = "manager";
+        web.enable = true;
+      };
+
 
       services.invidious = {
         enable = true;

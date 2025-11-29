@@ -36,6 +36,12 @@ in
       hostPath = "/home/gitea/.ssh";
     };
 
+    bindMounts."fileshare" = {
+      isReadOnly = true;
+      mountPoint = "/var/lib/webshare";
+      hostPath = "/home/fred/webshare";
+    };
+
     config = { config, pkgs, ...}: {
       networking.firewall.enable = true;
       networking.firewall.allowedTCPPorts = [ 80 443 ];
@@ -81,6 +87,17 @@ in
           locations."/".proxyPass = "http://10.10.31.10:3000"; 
           forceSSL = true;
           enableACME = true;
+        };
+
+        virtualHosts."share.fpf3.net" = {
+          forceSSL = true;
+          enableACME = true;
+          locations."/" = {
+            root = "/var/lib/webshare";
+            extraConfig = ''
+              autoindex on;
+            '';
+          };
         };
       };
 

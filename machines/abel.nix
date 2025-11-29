@@ -26,6 +26,9 @@
 
   virtualisation.waydroid.enable = true;
 
+  hardware.framework.amd-7040.preventWakeOnAC = true;
+  services.power-profiles-daemon.enable = true;
+
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
@@ -139,6 +142,7 @@
   # machine-specific user packages
   home-manager.users.fred.home.packages = with pkgs; [
     brightnessctl
+    nvtopPackages.amd
   ];
   
   # This option defines the first version of NixOS you have installed on this particular machine,

@@ -13,6 +13,9 @@ with pkgs; [
   strawberry
   synergy
   thunderbird-bin
+  kitty
+  waybar
+  wofi
   vlc
   yubioath-flutter
 ]
