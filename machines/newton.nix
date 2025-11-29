@@ -3,13 +3,12 @@
   imports =
     [
     # fragments
+    ../frags/zfs/zfs.nix
     ../frags/autosuspend/autosuspend.nix
     ../frags/lightdm/lightdm.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
-  # bootloader config
-  boot.loader.grub.zfsSupport = true;
 
   nixpkgs.overlays = [
     (final: prev: {
@@ -23,12 +22,12 @@
   # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ 
     "nohibernate"  # ZFS does not support swapfiles. Ensure we don't try to hibernate.
-    "zfs.zfs_arc_max=17179869184"  # Set max ARC to 16 GiB
-    "nvidia_drm.fbdev=0" # Explicitly disable fbdev
+    "zfs.zfs_arc_max=34359738368"  # Set max ARC to 32 GiB
+    #"nvidia_drm.fbdev=0" # Explicitly disable fbdev
     #"nvidia.TemporaryFilePath=/run" # dump contents of VRAM to DRAM
     "kvm.enable_virt_at_load=0" # keeps KVM available
   ];
-  boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
+  #boot.kernelModules = [ "nvidia_uvm" ]; # modprobes
 
   # enable cuda in nixpkgs
   nixpkgs.config.cudaSupport = true;
@@ -47,7 +46,7 @@
             finegrained = false; # Turn off GPU when not in use. "Turing" or newer. Can't use this, because we don't have integrated graphix
         };
         
-        open = false; # Open-source module (not nouveau, the upstream NVIDIA one...)
+        open = true; # Open-source module (not nouveau, the upstream NVIDIA one...)
 
         nvidiaSettings = true; # nvidia-settings manager
         
@@ -57,7 +56,10 @@
 
   networking.hostName = "newton";
 
-  networking.interfaces.enp6s0.wakeOnLan.enable = true;
+  networking.interfaces.enp7s0.wakeOnLan.enable = true;
+
+  # XXX Netbird
+  services.netbird.enable = true;
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -69,6 +71,7 @@
     active-monitor=1
     '';
   services.xserver.windowManager.dwm.enable = true;
+  services.xserver.windowManager.hyprland.enable = true;
   services.displayManager.defaultSession = "none+dwm";
   services.xserver.displayManager.lightdm.greeters.slick.extraConfig = ''
         only-on-monitor=DP-0
@@ -131,6 +134,7 @@
   # machine-specific user packages
   home-manager.users.fred.home.packages = with pkgs; [
     kicad
+    nvtopPackages.nvidia
   ];
 
   

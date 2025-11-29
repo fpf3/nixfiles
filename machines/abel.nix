@@ -3,15 +3,13 @@
   imports = 
   [
     # fragments
+    ../frags/zfs/zfs.nix
     ../frags/lightdm/lightdm.nix
 
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
 
-  # bootloader config
-  boot.loader.grub.zfsSupport = true;
-  
   swapDevices = [ ];
 
   # Kernel configuration
@@ -27,6 +25,9 @@
   boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
 
   virtualisation.waydroid.enable = true;
+
+  hardware.framework.amd-7040.preventWakeOnAC = true;
+  services.power-profiles-daemon.enable = true;
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
@@ -141,6 +142,7 @@
   # machine-specific user packages
   home-manager.users.fred.home.packages = with pkgs; [
     brightnessctl
+    nvtopPackages.amd
   ];
   
   # This option defines the first version of NixOS you have installed on this particular machine,
