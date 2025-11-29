@@ -3,15 +3,13 @@
   imports = 
   [
     # fragments
+    ../frags/zfs/zfs.nix
     ../frags/lightdm/lightdm.nix
 
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
 
-  # bootloader config
-  boot.loader.grub.zfsSupport = true;
-  
   swapDevices = [ ];
 
   # Kernel configuration
