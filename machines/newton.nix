@@ -3,13 +3,12 @@
   imports =
     [
     # fragments
+    ../frags/zfs/zfs.nix
     ../frags/autosuspend/autosuspend.nix
     ../frags/lightdm/lightdm.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
-  # bootloader config
-  boot.loader.grub.zfsSupport = true;
 
   nixpkgs.overlays = [
     (final: prev: {
@@ -23,7 +22,7 @@
   # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ 
     "nohibernate"  # ZFS does not support swapfiles. Ensure we don't try to hibernate.
-    "zfs.zfs_arc_max=17179869184"  # Set max ARC to 16 GiB
+    "zfs.zfs_arc_max=34359738368"  # Set max ARC to 32 GiB
     #"nvidia_drm.fbdev=0" # Explicitly disable fbdev
     #"nvidia.TemporaryFilePath=/run" # dump contents of VRAM to DRAM
     "kvm.enable_virt_at_load=0" # keeps KVM available
@@ -57,7 +56,7 @@
 
   networking.hostName = "newton";
 
-  networking.interfaces.enp6s0.wakeOnLan.enable = true;
+  networking.interfaces.enp7s0.wakeOnLan.enable = true;
 
   # XXX Netbird
   services.netbird.enable = true;
@@ -135,6 +134,7 @@
   # machine-specific user packages
   home-manager.users.fred.home.packages = with pkgs; [
     kicad
+    nvtopPackages.nvidia
   ];
 
   

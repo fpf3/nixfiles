@@ -2,6 +2,9 @@
 {
   imports = 
   [
+    # fragments
+    ../frags/zfs/zfs.nix
+
     # Containers for server modules
     ../containers/minecraft_servers.nix
     ../containers/jellyfin.nix
@@ -11,10 +14,13 @@
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib; withGui=false;})
   ];
-
-  # bootloader config
-  boot.loader.grub.zfsSupport = true;
   
+  boot.kernelParams = [ 
+    "nohibernate" # ZFS does not support swapfiles. 
+    "zfs.zfs_arc_max=17179869184" # Set max ARC size to 16GB
+    #"kvm.enable_virt_at_load=0" # keeps KVM available (do we want this for real virtualization later?)
+  ]; 
+
   # Kernel configuration
   # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ "nohibernate" ];
