@@ -4,6 +4,7 @@
   [
     # Containers for server modules
     ../containers/minecraft_servers.nix
+    ../containers/ds_experiments.nix
     ../containers/jellyfin.nix
     ../containers/web.nix
     #../containers/mail.nix
@@ -35,12 +36,16 @@
       PermitRootLogin = "no";
     };
   };
+  
+  home-manager.users.fred.home.packages = with pkgs; [
+    nvtopPackages.amd
+  ];
 
   # block persistent freaks
   services.fail2ban.enable = true;
   
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 5353 8000 ];
+  networking.firewall.allowedTCPPorts = [ 22 3389 3390 3391 3392 5353 8000 ];
 
   # Containers
 
