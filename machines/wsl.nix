@@ -9,6 +9,9 @@
       (import ../users/ffrey/ffrey.nix {pkgs=pkgs; config=config; lib=lib;})
     ];
 
+  # allow armv7l binfmt qemu
+  boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
+
   # ZFS wants this set. Why? XXX
   networking.hostId = "b2c73136"; # just a random number...
 
@@ -17,11 +20,27 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile.
   environment.systemPackages = with pkgs; [
     wget
     xorg.xhost
+    kmod
   ];
+
+  environment.sessionVariables = {
+  CUDA_PATH = "${pkgs.cudatoolkit}";
+  EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
+  EXTRA_CCFLAGS = "-I/usr/include";
+  LD_LIBRARY_PATH = [
+    "/usr/lib/wsl/lib"
+    "${pkgs.linuxPackages.nvidia_x11}/lib"
+    "${pkgs.ncurses5}/lib"
+    "/run/opengl-driver/lib"
+  ];
+  MESA_D3D12_DEFAULT_ADAPTER_NAME = "Nvidia";
+};
 
   # fonts
   fonts.packages = with pkgs; [
@@ -30,18 +49,36 @@
     #joypixels # figure out how to accept license declaratively
   ];
 
+  virtualisation.waydroid.enable = true;
+
   swapDevices = [ ];
 
-  wsl.enable = true;
-  wsl.defaultUser = "ffrey";
-  wsl.usbip = {
+  wsl = {
     enable = true;
-    autoAttach = [ "3-3" ];
+    defaultUser = "ffrey";
+    usbip = {
+      enable = true;
+      snippetIpAddress = "172.20.64.1";
+    };
+
+
+    useWindowsDriver = true;
+  };
+
+  hardware.graphics = {
+    enable = true;
+
+    extraPackages = with pkgs; [
+      mesa
+      libvdpau-va-gl
+      vaapiVdpau
+    ];
+  };
+
+  hardware.nvidia = {
   };
 
   networking.hostName = "wsl";
-  
-  networking.networkmanager.enable = true;
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;

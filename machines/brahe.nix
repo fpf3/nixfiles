@@ -38,8 +38,6 @@
 
   networking.hostName = "brahe";
   
-  networking.networkmanager.enable = true;
-  
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -93,7 +91,7 @@
   networking.firewall.allowedTCPPorts = [ 22 8000 ];
   
   # Enable the OpenSSH daemon.
-  services.openssh = {
+  services.openssh ={
     enable = true; # We can just leave passwd auth on for the desktop.
     settings = {
       PasswordAuthentication = true;

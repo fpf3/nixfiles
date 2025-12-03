@@ -2,8 +2,12 @@
 {
   imports = 
   [
+    # fragments
+    ../frags/zfs/zfs.nix
+
     # Containers for server modules
     ../containers/minecraft_servers.nix
+    ../containers/ds_experiments.nix
     ../containers/jellyfin.nix
     ../containers/web.nix
     #../containers/mail.nix
@@ -11,10 +15,13 @@
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib; withGui=false;})
   ];
-
-  # bootloader config
-  boot.loader.grub.zfsSupport = true;
   
+  boot.kernelParams = [ 
+    "nohibernate" # ZFS does not support swapfiles. 
+    "zfs.zfs_arc_max=17179869184" # Set max ARC size to 16GB
+    #"kvm.enable_virt_at_load=0" # keeps KVM available (do we want this for real virtualization later?)
+  ]; 
+
   # Kernel configuration
   # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ "nohibernate" ];
@@ -35,12 +42,16 @@
       PermitRootLogin = "no";
     };
   };
+  
+  home-manager.users.fred.home.packages = with pkgs; [
+    nvtopPackages.amd
+  ];
 
   # block persistent freaks
   services.fail2ban.enable = true;
   
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 22 5353 8000 ];
+  networking.firewall.allowedTCPPorts = [ 22 3389 3390 3391 3392 5353 8000 ];
 
   # Containers
 

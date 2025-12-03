@@ -34,7 +34,7 @@ in
 
     qt = lib.mkIf(withGui) {
       enable = true;
-      platformTheme = "gnome";
+      platformTheme = "kde";
       style = "adwaita-dark";
     };
 
@@ -81,6 +81,7 @@ in
         ++ (import ../../frags/pkgs/typesetting.nix { inherit pkgs; })
         ++ (import ../../frags/pkgs/custom.nix { inherit pkgs; })
         ++ (import ../../frags/pkgs/gui_utils.nix { inherit pkgs; })
+        ++ (import ../../frags/pkgs/wine.nix { inherit pkgs; })
       )
       ++ (import ../../frags/pkgs/general_dev.nix { inherit pkgs; })
       ++ (import ../../frags/pkgs/py_dev.nix { inherit pkgs; })

@@ -2,13 +2,14 @@
 {
   imports = 
   [
+    # fragments
+    ../frags/zfs/zfs.nix
+    ../frags/lightdm/lightdm.nix
+
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
 
-  # bootloader config
-  boot.loader.grub.zfsSupport = true;
-  
   swapDevices = [ ];
 
   # Kernel configuration
@@ -23,31 +24,59 @@
 
   boot.binfmt.emulatedSystems = [ "armv7l-linux" ];
 
+  virtualisation.waydroid.enable = true;
+
+  hardware.framework.amd-7040.preventWakeOnAC = true;
+  services.power-profiles-daemon.enable = true;
+
+  hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
   # peripherals configuration
   services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware = {
-    graphics.enable = true;
-    pulseaudio.enable = false;
-  };
+  
+  hardware.graphics.enable = true;
+  services.pulseaudio.enable = false;
 
   networking.hostName = "abel";
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.dwm.enable = true;
+  services.displayManager.defaultSession = "none+dwm";
 
   services.fprintd.enable = true;
   #services.fprintd.tod.enable = true;
   #services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix;
-  security.pam.services.gdm-fingerprint.fprintAuth = true; # "/etc/pam.d/gdm-fingerprint" is  not created by default
+  security.pam.services.lightdm-fingerprint.fprintAuth = true; # "/etc/pam.d/lightdm-fingerprint" is  not created by default
   security.pam.services.login.fprintAuth = false;
   security.pam.services.sudo.fprintAuth = false;
   security.pam.services.su.fprintAuth = false;
+
+  services.logind.lidSwitch = "ignore";
+
+  services.acpid = {
+    enable = true;
+    handlers = {
+      lidlock = {
+        event = "button/lid.*";
+        action = ''
+          #!/bin/bash
+
+          export XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+
+          grep -q close /proc/acpi/button/lid/*/state
+          if [ $? = 0 ]; then
+            # close action
+            ${pkgs.lightdm}/bin/dm-tool switch-to-greeter &
+            systemctl suspend
+          fi
+        '';
+      };
+    };
+  };
 
 
   services.fwupd.enable = true;
@@ -70,7 +99,6 @@
       position = "0x0";
       mode = "2256x1504";
       rate = "60.00";
-      dpi = 97;
     };
   };
 
@@ -109,6 +137,13 @@
     };
   };
 
+  services.mullvad-vpn.enable = true;
+
+  # machine-specific user packages
+  home-manager.users.fred.home.packages = with pkgs; [
+    brightnessctl
+    nvtopPackages.amd
+  ];
   
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

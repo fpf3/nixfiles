@@ -4,12 +4,16 @@ with pkgs; [
   bc
   expect
   fd
+  ffmpeg
   file
   htop
   imagemagick
+  kmod
   lm_sensors
   lsb-release
-  ncdu
+  lsof
+  mullvad
+  gdu
   openfortivpn
   pciutils
   ripgrep
@@ -18,6 +22,7 @@ with pkgs; [
   sysstat
   tmux
   tree
+  udisks
   unzip
   usbutils
   yubikey-manager

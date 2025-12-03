@@ -1,11 +1,8 @@
 {pkgs}:
 with pkgs; [
-  calibre
-  dconf
-  firefox
-  floorp
-  gnome-tweaks
-  kicad
+  brave
+  #calibre
+  cmakeWithGui
   libreoffice
   mumble
   networkmanagerapplet
@@ -13,8 +10,12 @@ with pkgs; [
   picom
   pywal
   remmina
+  strawberry
   synergy
-  thunderbird
+  thunderbird-bin
+  kitty
+  waybar
+  wofi
   vlc
   yubioath-flutter
 ]

@@ -16,6 +16,9 @@ in
   nixpkgs.config.allowUnfree = true;
 
   networking.resolvconf.enable = true;
+  networking.networkmanager.enable = true;
+
+  #nixpkgs.overlays = (import ./frags/pkgs/overlays.nix) { pkgs=pkgs; lib=lib; };
 
   boot.loader.grub = lib.mkIf commongrub {
     enable = true;
@@ -33,7 +36,6 @@ in
   # List packages installed in system profile.
    environment.systemPackages = with pkgs; [
      wget
-     xorg.xhost
    ];
 
   # fonts
@@ -46,6 +48,12 @@ in
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
 
+  nix.gc = {
+    automatic = true;
+    dates = [ "3:00" ];
+    persistent = true;
+  };
+  
   nix.optimise = {
     automatic = true;
     dates = [ "3:00" ];

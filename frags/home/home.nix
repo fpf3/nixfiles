@@ -10,15 +10,26 @@
   envVars ? {}, 
   ...
 }:
+let
+  flag_2505 = builtins.substring 0 5 (lib.version) <= "25.05";
+in
 {
   home.stateVersion = "24.05"; # Do I bump this, or keep it the same?
 
   # configs
   programs = {
     git = lib.mkIf(fullName != "") {
-        enable = true;
-        userName = fullName;
-        userEmail = emailAddr;
+      enable = true;
+    }
+    // lib.optionalAttrs(!flag_2505) {
+      settings.user = {
+        name = fullName;
+        email = emailAddr;
+      };
+    }
+    // lib.optionalAttrs(flag_2505) {
+      userName = fullName;
+      email = emailAddr;
     };
 
     mercurial = lib.mkIf(fullName != "") {
@@ -42,6 +53,14 @@
       settings.preview_images = true;
     };
 
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      tmux.enableShellIntegration = true;
+    };
+
+    bash.enable = true;
 
     zsh = (import ../zsh/zsh.nix) { lib=lib; envVars = envVars; };
 
@@ -52,10 +71,17 @@
 
   xresources.properties = {
     "st.alpha" = "1.0";
+    "st.font" = "mono:pixelsize=15:antialias=true:autohint=true";
     "dwm.borderpx" = "2";
   };
 
   programs.bash.sessionVariables = lib.mkIf(envVars != {}) envVars;
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    extraConfig = lib.readFile ../hyprland/hyprland.conf;
+  };
 
   dconf = lib.mkIf(dconf != {}) dconf;
   gtk = lib.mkIf(gtk != {}) gtk;
