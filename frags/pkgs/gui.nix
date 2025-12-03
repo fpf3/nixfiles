@@ -1,6 +1,7 @@
 {pkgs}:
 with pkgs; [
   calibre
+  dconf
   firefox
   floorp
   gnome-tweaks

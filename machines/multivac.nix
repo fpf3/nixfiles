@@ -1,24 +1,27 @@
 { config, lib, pkgs, ... }:
+let
+  grub_bg = builtins.path { path=../frags/grub/zentree_1.png; };
+in
 {
-  nixpkgs.config.allowUnfreePredicate = pkg:
-  builtins.elem (lib.getName pkg) [
-      "nvidia-x11"
-      "nvidia-settings"
-      "nvidia-persistenced"
-      "steam"
-      "steam-original"
-      "steam-run"
+  imports =
+    [
+     # User-specific config
+     (import ../users/fred/fred.nix {inherit pkgs lib config;})
     ];
 
+  nixpkgs.config.allowUnfree = true;
+
   # bootloader config
+  
+  # Bootloader.
   boot.loader.grub = {
-	enable = true;
-	efiSupport = true;
-	efiInstallAsRemovable = true;
-	mirroredBoots = [
-		{ devices = [ "nodev" ]; path = "/boot"; }
-	];
+    enable = true;
+    device = "/dev/sda";
+    useOSProber = true;
     configurationLimit = 5;
+    splashImage = grub_bg;
+    font = "${pkgs.nerd-fonts._0xproto}/share/fonts/truetype/NerdFonts/0xProto/0xProtoNerdFontMono-Regular.ttf";
+    fontSize = 12;
   };
 
   swapDevices = [ ];
@@ -31,8 +34,6 @@
   networking.hostName = "multivac";
   
   networking.networkmanager.enable = true;
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -50,6 +51,9 @@
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  
+  # Enable natural scrolling
+  services.libinput.touchpad.naturalScrolling = true; # This is for libinput, but it seems to also work in X11
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

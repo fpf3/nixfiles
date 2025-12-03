@@ -1,5 +1,5 @@
 # Common settings between all machines
-{config, lib, pkgs, ...}:
+{config, lib, pkgs, commongrub ? true, ...}:
 let
   grub_bg = builtins.path { path=./frags/grub/zentree_1.png; };
 in
@@ -17,7 +17,7 @@ in
 
   networking.resolvconf.enable = true;
 
-  boot.loader.grub = {
+  boot.loader.grub = lib.mkIf commongrub {
     enable = true;
     efiSupport = true;
     efiInstallAsRemovable = true;
