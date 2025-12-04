@@ -5,6 +5,8 @@ in
 {
   imports =
     [
+     # frags
+     ../frags/lightdm/lightdm.nix
      # User-specific config
      (import ../users/fred/fred.nix {inherit pkgs lib config;})
     ];
@@ -33,13 +35,9 @@ in
 
   networking.hostName = "multivac";
   
-  networking.wireless.iwd.enable = true;
-  networking.networkmanager.wifi.backend = "iwd";
-  
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.xserver.displayManager.lightdm.enable = true;
   #services.xserver.displayManager.gdm.enable = true;
   #services.displayManager.sddm.enable = true;
   services.xserver.windowManager.dwm.enable = true;
