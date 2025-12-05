@@ -59,6 +59,14 @@ in
       enableBashIntegration = true;
       tmux.enableShellIntegration = true;
     };
+    
+    # package search index
+    nix-index = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+    command-not-found.enable = false;
 
     bash.enable = true;
 
