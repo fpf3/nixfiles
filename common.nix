@@ -19,7 +19,7 @@ in
 
   networking.networkmanager.enable = true;
 
-  #nixpkgs.overlays = (import ./frags/pkgs/overlays.nix) { pkgs=pkgs; lib=lib; };
+  nixpkgs.overlays = (import ./frags/pkgs/overlays.nix) { pkgs=pkgs; lib=lib; };
 
   boot.loader.grub = {
     enable = true;
@@ -60,10 +60,14 @@ in
     dates = [ "3:00" ];
     persistent = true;
   };
-  
+
   # enable auto-upgrade on reboot
   system.autoUpgrade.enable = true;
   system.autoUpgrade.persistent = true;
+  
+  services.autorandr.hooks.postswitch = {
+    "fix-background" = (lib.readFile ./scripts/scripts/fix_wallpaper.sh);
+  };
 
   # enable avahi
   services.avahi = {
