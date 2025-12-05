@@ -55,7 +55,7 @@
   security.pam.services.sudo.fprintAuth = false;
   security.pam.services.su.fprintAuth = false;
 
-  services.logind.lidSwitch = "ignore";
+  services.logind.settings.Login.HandleLidSwitch = "ignore";
 
   services.acpid = {
     enable = true;
@@ -86,19 +86,48 @@
 
   # Set X11 monitor R&R
 
-  services.autorandr.enable = true;
-  services.autorandr.profiles."default" = {
-    fingerprint = { 
-      "eDP" = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
+  services.autorandr = {
+    enable = true;
+    ignoreLid =  true;
+    defaultTarget = "laptop";
+    profiles."laptop" = {
+      fingerprint = { 
+        "eDP" = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
+      };
+
+      config."eDP" = {
+        enable = true;
+        primary = true;
+        scale = { x = 0.7; y = 0.7; }; 
+        position = "0x0";
+        mode = "2256x1504";
+        rate = "60.00";
+      };
     };
 
-    config."eDP" = {
-      enable = true;
-      primary = true;
-      scale = { x = 0.7; y = 0.7; }; 
-      position = "0x0";
-      mode = "2256x1504";
-      rate = "60.00";
+    profiles."desktop" = {
+      fingerprint = { 
+        "eDP" = "00ffffffffffff0009e5ca0b000000002f200104a51c137803de50a3544c99260f505400000001010101010101010101010101010101115cd01881e02d50302036001dbe1000001aa749d01881e02d50302036001dbe1000001a000000fe00424f452043510a202020202020000000fe004e4531333546424d2d4e34310a0073";
+        "DisplayPort-2" = "00ffffffffffff0005e33032980a0000221f0103804627782e6665ac4f47a727125054bfef00d1c081803168317c4568457c6168617c565e00a0a0a0295030203500b9882100001e000000ff005043544d384a41303032373132000000fc0041473332335157473452332b0a000000fd0030901ee63c000a2020202020200122020348f14e101f05140413031202110160613f230907078301000067030c001000384267d85dc401788003e305e301e30f0018e60607016363006d1a000002013090e6000000000040e7006aa0a0675008209804b9882100001a6fc200a0a0a0555030203500b9882100001ef03c00d051a0355060883a00b9882100001c007d";
+      };
+
+      config."eDP" = {
+        enable = true;
+        primary = false;
+        scale = { x = 0.7; y = 0.7; }; 
+        position = "0x1504";
+        mode = "2256x1504";
+        rate = "60.00";
+      };
+
+      config."DisplayPort-2" = {
+        enable = true;
+        primary = true;
+        position = "0x0";
+        mode = "2560x1440";
+        #rate = "155.00";
+        rate = "143.91";
+      };
     };
   };
 

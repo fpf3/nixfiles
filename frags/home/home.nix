@@ -59,6 +59,14 @@ in
       enableBashIntegration = true;
       tmux.enableShellIntegration = true;
     };
+    
+    # package search index
+    nix-index = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
+    command-not-found.enable = false;
 
     bash.enable = true;
 
@@ -77,11 +85,11 @@ in
 
   programs.bash.sessionVariables = lib.mkIf(envVars != {}) envVars;
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    extraConfig = lib.readFile ../hyprland/hyprland.conf;
-  };
+  #wayland.windowManager.hyprland = {
+  #  enable = true;
+  #  xwayland.enable = true;
+  #  extraConfig = lib.readFile ../hyprland/hyprland.conf;
+  #};
 
   dconf = lib.mkIf(dconf != {}) dconf;
   gtk = lib.mkIf(gtk != {}) gtk;
