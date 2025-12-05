@@ -16,19 +16,17 @@
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib; withGui=false;})
   ];
   
+  # Kernel configuration
+  # No kernel packages selected -> LTS Kernel
   boot.kernelParams = [ 
     "nohibernate" # ZFS does not support swapfiles. 
     "zfs.zfs_arc_max=17179869184" # Set max ARC size to 16GB
     #"kvm.enable_virt_at_load=0" # keeps KVM available (do we want this for real virtualization later?)
   ]; 
 
-  # Kernel configuration
-  # No kernel packages selected -> LTS Kernel
-  boot.kernelParams = [ "nohibernate" ];
-
-  # mdadm RAID
-  boot.swraid.enable = true;
-  boot.swraid.mdadmConf = "ARRAY /dev/md/nixos:RAID metadata=1.2 name=nixos:RAID UUID=0e998e37:3a0a40dc:913ac107:8b1055f0";
+  ## mdadm RAID
+  #boot.swraid.enable = true;
+  #boot.swraid.mdadmConf = "ARRAY /dev/md/nixos:RAID metadata=1.2 name=nixos:RAID UUID=0e998e37:3a0a40dc:913ac107:8b1055f0";
 
   networking.hostName = "bernoulli"; # Define your hostname.
   
