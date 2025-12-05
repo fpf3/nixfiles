@@ -85,11 +85,11 @@ in
 
   programs.bash.sessionVariables = lib.mkIf(envVars != {}) envVars;
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    extraConfig = lib.readFile ../hyprland/hyprland.conf;
-  };
+  #wayland.windowManager.hyprland = {
+  #  enable = true;
+  #  xwayland.enable = true;
+  #  extraConfig = lib.readFile ../hyprland/hyprland.conf;
+  #};
 
   dconf = lib.mkIf(dconf != {}) dconf;
   gtk = lib.mkIf(gtk != {}) gtk;

@@ -1,5 +1,5 @@
 # Common settings between all machines
-{config, lib, pkgs, ...}:
+{config, lib, pkgs, commongrub ? true, ...}:
 let
   grub_bg = builtins.path { path=./frags/grub/zentree_1.png; };
 in
@@ -16,12 +16,11 @@ in
   nixpkgs.config.allowUnfree = true;
 
   networking.resolvconf.enable = true;
-
   networking.networkmanager.enable = true;
 
   nixpkgs.overlays = (import ./frags/pkgs/overlays.nix) { pkgs=pkgs; lib=lib; };
 
-  boot.loader.grub = {
+  boot.loader.grub = lib.mkIf commongrub {
     enable = true;
     efiSupport = true;
     efiInstallAsRemovable = true;
