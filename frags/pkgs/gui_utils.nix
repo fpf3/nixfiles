@@ -7,6 +7,7 @@ with pkgs; [
   playerctl
   rofi
   rofimoji
+  solaar
   scrot
   xclip
   keepassxc

@@ -76,6 +76,10 @@
         only-on-monitor=DP-0
       '';
 
+  # logitech support   
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
+
   # Set X11 monitor R&R
 
   services.autorandr.enable = true;
