@@ -17,6 +17,7 @@ in
             coc-rust-analyzer
             coc-clangd
             coc-pyright
+            coc-git
             live-command-nvim
         ];
         extraConfig = builtins.replaceStrings
