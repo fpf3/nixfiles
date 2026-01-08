@@ -3,7 +3,10 @@ with pkgs; [
   dmenu
   dconf
   feh
-  nautilus
+  kdePackages.dolphin
+  kdePackages.kde-cli-tools
+  libsForQt5.kservice
+  xdg-desktop-portal
   playerctl
   rofi
   rofimoji

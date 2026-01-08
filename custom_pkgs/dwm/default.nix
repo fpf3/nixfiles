@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     ref = "master";
   };
   
-  buildInputs = [ (builtins.path { path = src.outPath; }) libX11 libXinerama libXft libxcb ];
+  buildInputs = [ libX11 libXinerama libXft libxcb ];
 
   prePatch = ''
     sed -i "s@/usr/local@$out@" config.mk

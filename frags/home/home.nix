@@ -83,6 +83,25 @@ in
     "dwm.borderpx" = "2";
   };
 
+  # default filebrowser
+  xdg.desktopEntries.dolphin = {
+    name = "Dolphin";
+    exec = "${pkgs.kdePackages.dolphin}/bin/dolphin";
+  };
+
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = [ "dolphin.desktop" ];
+      "application/x-gnome-saved-search" = [ "dolphin.desktop" ];
+    };
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+  };
+
   programs.bash.sessionVariables = lib.mkIf(envVars != {}) envVars;
 
   #wayland.windowManager.hyprland = {

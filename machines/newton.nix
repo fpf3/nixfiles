@@ -76,6 +76,11 @@
         only-on-monitor=DP-0
       '';
 
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "${pkgs.dwm}/bin/dwm";
+  services.xrdp.openFirewall = true; 
+
+  services.x2goserver.enable = true;
   # logitech support   
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;

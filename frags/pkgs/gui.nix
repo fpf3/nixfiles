@@ -6,6 +6,7 @@ with pkgs; [
   libreoffice
   mumble
   networkmanagerapplet
+  nicotine-plus
   pavucontrol
   picom
   pywal
