@@ -16,6 +16,11 @@ in
 {
   home.stateVersion = "24.05"; # Do I bump this, or keep it the same?
 
+  home.file.cocsettings = {
+    source = ../vim/coc-settings.json;
+    target = ".vim/coc-settings.json";
+  };
+
   # configs
   programs = {
     git = lib.mkIf(fullName != "") {
