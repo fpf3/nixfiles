@@ -19,6 +19,7 @@ in
             coc-pyright
             coc-git
             live-command-nvim
+            vimspector
         ];
         extraConfig = builtins.replaceStrings
           ["COC_KEYBINDS_PATH"]
