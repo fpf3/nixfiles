@@ -1,8 +1,10 @@
 {pkgs}:
 with pkgs; [
-  brave
   #calibre
+  brave
   cmakeWithGui
+  deskflow
+  kitty
   libreoffice
   mumble
   networkmanagerapplet
@@ -12,11 +14,9 @@ with pkgs; [
   pywal
   remmina
   strawberry
-  synergy
   thunderbird-bin
-  kitty
+  vlc
   waybar
   wofi
-  vlc
   yubioath-flutter
 ]
