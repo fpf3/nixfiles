@@ -8,6 +8,7 @@ with pkgs; [
   libsForQt5.kservice
   xdg-desktop-portal
   playerctl
+  putty
   rofi
   rofimoji
   solaar

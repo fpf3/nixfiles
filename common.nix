@@ -42,6 +42,7 @@ in
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-color-emoji
+    noto-fonts-cjk-sans # fixes e.g. Chinese characters being invisible in chromium
     #joypixels # figure out how to accept license declaratively
   ];
 
