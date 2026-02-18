@@ -46,6 +46,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-color-emoji
+    noto-fonts-cjk-sans
     #joypixels # figure out how to accept license declaratively
   ];
 
@@ -71,7 +72,7 @@
     extraPackages = with pkgs; [
       mesa
       libvdpau-va-gl
-      vaapiVdpau
+      libva-vdpau-driver
     ];
   };
 

@@ -104,6 +104,7 @@ in
 
   xdg.portal = {
     enable = true;
+    config.common.default = "*";
     extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
   };
 
