@@ -79,7 +79,10 @@ in
         enable = true;
         openFirewall = true;
         user = "manager";
-        web.enable = true;
+        web = {
+          enable = true;
+          openFirewall = true;
+        };
       };
 
 

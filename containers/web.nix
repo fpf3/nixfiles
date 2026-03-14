@@ -29,6 +29,9 @@ in
         hostPort = 2222;
         protocol = "tcp";
       }];
+    #++(contport 10000)
+    #++(contport 3478)
+    #++(contport 5349);
       
     bindMounts."giteassh" ={
       isReadOnly = false;
@@ -172,6 +175,15 @@ in
             channels = [ "lainchan" ];
           };
         };
+      };
+
+      nixpkgs.config.permittedInsecurePackages = [
+        "jitsi-meet-1.0.8792"
+      ];
+
+      services.jitsi-meet = {
+        enable = true;
+        hostName = "jitsi.fpf3.net";
       };
 
       environment.systemPackages = with pkgs; [

@@ -7,7 +7,7 @@
 
     # Containers for server modules
     ../containers/minecraft_servers.nix
-    ../containers/ds_experiments.nix
+    #../containers/ds_experiments.nix
     ../containers/jellyfin.nix
     ../containers/web.nix
     #../containers/mail.nix
