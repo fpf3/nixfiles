@@ -177,12 +177,13 @@ in
         };
       };
 
-      nixpkgs.config.permittedInsecurePackages = [
-        "jitsi-meet-1.0.8792"
-      ];
+      # XXX
+      #nixpkgs.config.permittedInsecurePackages = [
+      #  "jitsi-meet-1.0.8792"
+      #];
 
       services.jitsi-meet = {
-        enable = true;
+        enable = false; # XXX
         hostName = "jitsi.fpf3.net";
       };
 
