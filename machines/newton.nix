@@ -6,6 +6,7 @@
     ../frags/zfs/zfs.nix
     ../frags/autosuspend/autosuspend.nix
     ../frags/lightdm/lightdm.nix
+    ../frags/remotebuild/server.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];
@@ -142,6 +143,7 @@
   # machine-specific user packages
   home-manager.users.fred.home.packages = with pkgs; [
     kicad
+    freecad
     nvtopPackages.nvidia
   ];
 

@@ -43,7 +43,7 @@ let
       services.xrdp.port = rdpPort;
 
       environment.systemPackages = with pkgs; [
-        melonDS
+        melonds
         zfs
         firefox
       ];

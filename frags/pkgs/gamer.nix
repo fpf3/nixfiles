@@ -4,6 +4,6 @@ with pkgs; [
   dolphin-emu
   prismlauncher
   lutris
-  melonDS
+  melonds
   openttd
 ]

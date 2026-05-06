@@ -55,12 +55,13 @@ in
         };
       };
 
-      gtk = lib.mkIf(withGui) {
+      gtk = lib.mkIf(withGui) rec {
         enable = true;
         theme = {
           name = "Adwaita-dark";
           package = pkgs.gnome-themes-extra;
         };
+        gtk4.theme = theme;
       };
       
       pointerCursor = lib.mkIf(withGui) {

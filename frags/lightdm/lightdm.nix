@@ -18,7 +18,7 @@ in
   };
   
   environment.systemPackages = with pkgs; [
-    xorg.xhost
+    xhost
     dconf
     orca
     gdk-pixbuf
