@@ -2,6 +2,7 @@
 with pkgs; [
   dmenu
   dconf
+  deluge
   feh
   kdePackages.dolphin
   kdePackages.kde-cli-tools
