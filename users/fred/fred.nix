@@ -29,9 +29,6 @@ in
     virtualisation.virtualbox.host.enable = lib.mkIf(withGui) true;
     users.extraGroups.vbox.members = lib.mkIf(withGui) [ "${username}" ];
 
-    # give me the man pages... christ
-    documentation.dev.enable = true;
-
     qt = lib.mkIf(withGui) {
       enable = true;
       platformTheme = "kde";
@@ -65,6 +62,7 @@ in
       };
       
       pointerCursor = lib.mkIf(withGui) {
+        enable = true;
         gtk.enable = true;
         x11.enable = true;
         name = "Adwaita";

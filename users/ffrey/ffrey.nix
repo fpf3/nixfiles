@@ -14,9 +14,6 @@ in
 
     services.pcscd.enable = true; # system-wide pcscd enable
 
-    # give me the man pages... christ
-    documentation.dev.enable = true;
-
     # Home Manager
     home-manager.users.ffrey = (import ../../frags/home/home.nix) { 
       pkgs=pkgs; 
