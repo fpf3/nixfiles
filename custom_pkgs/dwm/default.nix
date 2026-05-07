@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, libX11, libXinerama, libXft, libxcb, writeText, patches ? [ ], conf ? null
+{ lib, stdenv, fetchurl, libX11, libXinerama, libXft, libxcb, libxcursor, writeText, patches ? [ ], conf ? null
 # update script dependencies
 , gitUpdater
 }:
@@ -7,14 +7,14 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "dwm";
-  version = "6.2-fpf3+";
+  version = "6.3-fpf3+";
   
   src = fetchGit {
     url = "https://github.com/fpf3/dwm.git";
     ref = "master";
   };
   
-  buildInputs = [ libX11 libXinerama libXft libxcb ];
+  buildInputs = [ libX11 libXinerama libXft libxcb libxcursor ];
 
   prePatch = ''
     sed -i "s@/usr/local@$out@" config.mk

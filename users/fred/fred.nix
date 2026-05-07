@@ -65,9 +65,9 @@ in
         enable = true;
         gtk.enable = true;
         x11.enable = true;
-        name = "Adwaita";
+        name = "Bibata-Modern-Classic";
         size=16;
-        package = pkgs.adwaita-icon-theme;
+        package = pkgs.mint-cursor-themes;
       };
 
       # installed packages

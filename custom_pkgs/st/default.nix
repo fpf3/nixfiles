@@ -6,6 +6,7 @@
 , libX11
 , libXext
 , libXft
+, libxcursor
 , ncurses
 , pkg-config
 }:
@@ -28,6 +29,7 @@ stdenv.mkDerivation rec {
     libX11
     libXext
     libXft
+    libxcursor
     ncurses
   ];
 
