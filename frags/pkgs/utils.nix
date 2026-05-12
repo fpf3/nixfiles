@@ -2,10 +2,12 @@
 with pkgs; [
   acpi
   bc
+  dos2unix
   expect
   fd
   ffmpeg
   file
+  gdu
   htop
   imagemagick
   kmod
@@ -13,8 +15,8 @@ with pkgs; [
   lsb-release
   lsof
   mullvad
-  gdu
   openfortivpn
+  p7zip
   pciutils
   ripgrep
   screen
