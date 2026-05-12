@@ -5,6 +5,7 @@
     # fragments
     ../frags/zfs/zfs.nix
     ../frags/lightdm/lightdm.nix
+    ../frags/virtualbox/virtualbox.nix
 
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})

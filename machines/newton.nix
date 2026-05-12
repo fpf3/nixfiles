@@ -7,6 +7,7 @@
     ../frags/autosuspend/autosuspend.nix
     ../frags/lightdm/lightdm.nix
     ../frags/remotebuild/server.nix
+    ../frags/virtualbox/virtualbox.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
   ];

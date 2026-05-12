@@ -11,8 +11,6 @@
 
     services.pcscd.enable = true; # system-wide pcscd enable
 
-    # not packages per se, but this is what gives us virtualbox
-    virtualisation.virtualbox.host.enable = true;
     users.extraGroups.vbox.members = [ "theater" ];
 
     # steam system config

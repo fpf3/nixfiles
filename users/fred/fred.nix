@@ -26,8 +26,7 @@ in
     };
 
     # not packages per se, but this is what gives us virtualbox
-    virtualisation.virtualbox.host.enable = lib.mkIf(withGui) true;
-    users.extraGroups.vbox.members = lib.mkIf(withGui) [ "${username}" ];
+    users.extraGroups.vboxusers.members = lib.mkIf(withGui) [ "${username}" ];
 
     qt = lib.mkIf(withGui) {
       enable = true;
