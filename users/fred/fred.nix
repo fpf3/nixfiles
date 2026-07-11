@@ -27,6 +27,7 @@ in
 
     # not packages per se, but this is what gives us virtualbox
     users.extraGroups.vboxusers.members = lib.mkIf(withGui) [ "${username}" ];
+    users.extraGroups.libvirtd.members = lib.mkIf(withGui) [ "${username}" ];
 
     qt = lib.mkIf(withGui) {
       enable = true;
