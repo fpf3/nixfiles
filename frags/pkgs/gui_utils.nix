@@ -2,10 +2,11 @@
 with pkgs; [
   dmenu
   dconf
+  deluge
   feh
   kdePackages.dolphin
   kdePackages.kde-cli-tools
-  libsForQt5.kservice
+  kdePackages.kservice
   xdg-desktop-portal
   playerctl
   putty

@@ -104,8 +104,11 @@ in
 
   xdg.portal = {
     enable = true;
-    config.common.default = "*";
-    extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+    config.common.default = [ "gtk" ];
+    extraPortals = with pkgs; [ 
+      xdg-desktop-portal-gnome 
+      xdg-desktop-portal-gtk
+    ];
   };
 
   programs.bash.sessionVariables = lib.mkIf(envVars != {}) envVars;

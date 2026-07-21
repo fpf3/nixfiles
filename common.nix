@@ -68,6 +68,9 @@ in
   services.autorandr.hooks.postswitch = {
     "fix-background" = (lib.readFile ./scripts/scripts/fix_wallpaper.sh);
   };
+    
+  # give me the man pages... christ
+  documentation.dev.enable = true;
 
   # enable avahi
   services.avahi = {

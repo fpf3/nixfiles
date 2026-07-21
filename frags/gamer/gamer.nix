@@ -12,4 +12,6 @@ in
   };
 
   services.udev.packages = listIf(withGui) [ pkgs.dolphin-emu ];
+
+  boot.kernelModules = [ "ntsync" ]; # NT synch api emulation, boosts proton perf
 }

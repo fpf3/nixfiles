@@ -7,6 +7,7 @@ in
     [
      # frags
      ../frags/lightdm/lightdm.nix
+     ../frags/remotebuild/client.nix
      # User-specific config
      (import ../users/fred/fred.nix {inherit pkgs lib config;})
     ];

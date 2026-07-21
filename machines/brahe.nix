@@ -4,6 +4,7 @@
   [
     # fragments
     ../frags/autosuspend/autosuspend.nix
+    ../frags/virtualbox/virtualbox.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
     (import ../users/theater/theater.nix {pkgs=pkgs; config=config; lib=lib;})

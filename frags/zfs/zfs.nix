@@ -3,6 +3,8 @@
   # bootloader config
   boot.loader.grub.zfsSupport = true;
 
+  boot.zfs.forceImportRoot = false;
+
   # enable ZFS snapshots
 
   services.zfs.autoSnapshot = {

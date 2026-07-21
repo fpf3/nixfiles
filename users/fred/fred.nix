@@ -26,11 +26,8 @@ in
     };
 
     # not packages per se, but this is what gives us virtualbox
-    virtualisation.virtualbox.host.enable = lib.mkIf(withGui) true;
-    users.extraGroups.vbox.members = lib.mkIf(withGui) [ "${username}" ];
-
-    # give me the man pages... christ
-    documentation.dev.enable = true;
+    users.extraGroups.vboxusers.members = lib.mkIf(withGui) [ "${username}" ];
+    users.extraGroups.libvirtd.members = lib.mkIf(withGui) [ "${username}" ];
 
     qt = lib.mkIf(withGui) {
       enable = true;
@@ -55,20 +52,22 @@ in
         };
       };
 
-      gtk = lib.mkIf(withGui) {
+      gtk = lib.mkIf(withGui) rec {
         enable = true;
         theme = {
           name = "Adwaita-dark";
           package = pkgs.gnome-themes-extra;
         };
+        gtk4.theme = theme;
       };
       
       pointerCursor = lib.mkIf(withGui) {
+        enable = true;
         gtk.enable = true;
         x11.enable = true;
-        name = "Adwaita";
+        name = "Bibata-Modern-Classic";
         size=16;
-        package = pkgs.adwaita-icon-theme;
+        package = pkgs.mint-cursor-themes;
       };
 
       # installed packages
