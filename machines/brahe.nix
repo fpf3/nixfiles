@@ -49,11 +49,6 @@
   # dwm
   services.xserver.windowManager.dwm.enable = true;
 
-  # kde
-  #services.displayManager.sddm.enable = true;
-  #services.desktopManager.plasma6.enable = true;
-
-  
   # Set X11 monitor R&R
 
   services.autorandr.enable = true;
