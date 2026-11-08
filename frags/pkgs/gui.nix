@@ -1,7 +1,8 @@
 {pkgs}:
 with pkgs; [
   #calibre
-  brave
+  #brave
+  firefox
   cmakeWithGui
   deskflow
   kitty

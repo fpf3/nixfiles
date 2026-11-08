@@ -4,7 +4,7 @@
   [
     # fragments
     ../frags/autosuspend/autosuspend.nix
-    ../frags/virtualbox/virtualbox.nix
+    ../frags/lightdm/lightdm.nix
     # User-specific config
     (import ../users/fred/fred.nix {pkgs=pkgs; config=config; lib=lib;})
     (import ../users/theater/theater.nix {pkgs=pkgs; config=config; lib=lib;})
@@ -33,7 +33,7 @@
 
         nvidiaSettings = true; # nvidia-settings manager
         
-        package = config.boot.kernelPackages.nvidiaPackages.stable; # One of stable, beta, production or vulkan_stable
+        package = config.boot.kernelPackages.nvidiaPackages.legacy_580; # One of stable, beta, production or vulkan_stable
     };
   };
 
@@ -43,9 +43,10 @@
   services.xserver.enable = true;
 
   # GNOME
-  services.xserver.displayManager.gdm.enable = true;
+  #services.xserver.displayManager.gdm.enable = true;
   #services.xserver.desktopManager.gnome.enable = true;
   services.xserver.desktopManager.cinnamon.enable = true;
+  #services.xserver.desktopManager.xfce.enable = true;
 
   # dwm
   services.xserver.windowManager.dwm.enable = true;
@@ -55,10 +56,10 @@
   services.autorandr.enable = true;
   services.autorandr.profiles."default" = {
     fingerprint = { 
-      "HDMI-0" = "00ffffffffffff004c2d5b73000e000101210103808e50780aa833ab5045a5270d4848bdef80714f81c0810081809500a9c0b300d1c008e80030f2705a80b0588a00501d7400001e565e00a0a0a029503020350000000000001a000000fd00184b0f873c000a202020202020000000fc0053414d53554e470a202020202001db02035af05561101f041305142021225d5e5f606566626403125a2f0d5707090707150750570700675400830f0000e2004fe305c3016e030c003000b8442800800102030467d85dc40178800be3060d01e30f01e0e5018b849001000000000000000000000000000000000000000000000000000000000000000000000000000b";
+      "HDMI-1" = "00ffffffffffff001e6d010001010101011d010380a05a780aee91a3544c99260f5054a1080031404540614071408180d1c00101010104740030f2705a80b0588a0040846300001e023a801871382d40582c450040846300001e000000fd0018781e871e000a202020202020000000fc004c472054560a20202020202020018c02033ff1565f101f0413051403021220212215015d5e6263643f40230957076e030c002000b83c20008001020304e200cfe305c000e50e60616566e3060d01662150b051001b304070360040846300001e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e2";
     };
 
-    config."HDMI-0" = {
+    config."HDMI-1" = {
       enable = true;
       primary = true;
       #scale = { x = 0.7; y = 0.7; };
@@ -71,9 +72,6 @@
   
   # Enable natural scrolling
   services.libinput.touchpad.naturalScrolling = true; # This is for libinput, but it seems to also work in X11
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -94,6 +92,8 @@
       PermitRootLogin = "no";
     };
   };
+
+  services.joycond.enable = true;
   
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

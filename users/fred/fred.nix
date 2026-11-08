@@ -66,7 +66,7 @@ in
         gtk.enable = true;
         x11.enable = true;
         name = "Bibata-Modern-Classic";
-        size=16;
+        size=48;
         package = pkgs.mint-cursor-themes;
       };
 
